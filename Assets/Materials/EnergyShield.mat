@@ -49,11 +49,13 @@ Material:
     - _ImpactTime: 0
     - _IntersectIntensity: 3
     - _IntersectWidth: 0.5
+    - _MaxRadius: 3
     - _NoiseScale: 1.5
     - _NoiseSpeed: 0.38
     - _NoiseStrength: 0.044
     - _PulseSpeed: 3
     - _RimPower: 2.73
+    - _RippleWidth: 0.12
     - _TriRings: 3
     - _TriScale: 0.28
     - _WaveFade: 2.5
@@ -73,6 +75,7 @@ Material:
     - _ImpactPos: {r: 0, g: 0, b: 0, a: 0}
     - _IntersectColor: {r: 0, g: 0.89763784, b: 1, a: 1}
     - _RimColor: {r: 0.29999998, g: 0.85, b: 1, a: 1}
+    - _RippleColor: {r: 0.2, g: 0.9411765, b: 1, a: 1}
     - _ShieldColor: {r: 0, g: 0, b: 0, a: 0.2}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
