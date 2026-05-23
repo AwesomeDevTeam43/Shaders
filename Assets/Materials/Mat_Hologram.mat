@@ -25,13 +25,14 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _BreathAmp: 0.01
-    - _BreathSpeed: 2
+    - _BreathAmp: 0.00005
+    - _BreathSpeed: 1
     - _GlitchIntensity: 0
-    - _RimPower: 3
-    - _ScanlineFreq: 50
-    - _ScanlineIntensity: 0.5
-    - _ScanlineSpeed: 5
+    - _IsConstantGlitch: 0
+    - _RimPower: 1.71
+    - _ScanlineFreq: 100
+    - _ScanlineIntensity: 0.614
+    - _ScanlineSpeed: 15
     m_Colors:
     - _Color: {r: 0, g: 0.933, b: 1, a: 0.75}
   m_BuildTextureStacks: []
