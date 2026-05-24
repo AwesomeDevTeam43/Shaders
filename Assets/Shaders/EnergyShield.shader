@@ -36,7 +36,7 @@ Shader "Custom/EnergyShield"
             float  _ImpactTime;
             float  _MaxRadius;
             float  _RippleWidth;
-
+            
             struct appdata
             {
                 float4 vertex : POSITION;
@@ -58,6 +58,7 @@ Shader "Custom/EnergyShield"
                 float3 viewDir  : TEXCOORD2;
             };
 
+            // ── Vertex ────────────────────────────────────────────────────
             v2g vert(appdata v)
             {
                 v2g o;
@@ -90,7 +91,10 @@ Shader "Custom/EnergyShield"
 
                 // Expansão ao longo da normal proporcional à intensidade da onda
                 // e que diminui conforme _ImpactTime avança (a onda "aplana" ao expandir)
-                float expand = onWave * 0.04 * (1.0 - _ImpactTime);
+                // step(0.001, _ImpactTime) garante que quando o timer é 0, expand = 0
+                // sem isto, triângulos perto do impacto ficam deslocados permanentemente
+                float active = step(0.001, _ImpactTime);
+                float expand = onWave * 0.04 * (1.0 - _ImpactTime) * active;
 
                 for (int i = 0; i < 3; i++)
                 {
@@ -110,6 +114,7 @@ Shader "Custom/EnergyShield"
                 stream.RestartStrip();
             }
 
+            // ── Fragment ──────────────────────────────────────────────────
             fixed4 frag(g2f i) : SV_Target
             {
                 float3 N = normalize(i.normal);
@@ -133,7 +138,8 @@ Shader "Custom/EnergyShield"
                 float ripple = 1.0 - smoothstep(0.0, _RippleWidth, abs(dist - currentRadius));
 
                 // A onda vai ficando mais fraca conforme se expande
-                float rippleFade = ripple * (1.0 - _ImpactTime);
+                // step(0.001, _ImpactTime): desliga o ripple completamente quando timer = 0
+                float rippleFade = ripple * (1.0 - _ImpactTime) * step(0.001, _ImpactTime);
 
                 // ── Cor final ──────────────────────────────────────────────
                 fixed4 col;
