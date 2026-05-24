@@ -4,8 +4,8 @@ using System.Collections;
 public class KerrAnomaly : MonoBehaviour
 {
     private Material blackHoleMat;
-    private float targetMass = 0.05f;
-    private float targetSpin = 5.0f;
+    private float targetMass = 0.08f;
+    private float targetSpin = 5.94f;
 
     void Start()
     {
