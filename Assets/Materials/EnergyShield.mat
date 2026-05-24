@@ -1,0 +1,81 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: EnergyShield
+  m_Shader: {fileID: 4800000, guid: d1c086baf75552f459405bdc19495d14, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _CameraDepthTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _DistortRadius: 0.6
+    - _DistortStrength: 0.06
+    - _FlowIntensity: 0.5
+    - _FlowScale: 6
+    - _FlowSpeed: 0.6
+    - _FresnelIntensity: 1.4
+    - _GeomExpand: 0.08
+    - _HexBrightness: 2
+    - _HexLineWidth: 0.674
+    - _HexPulseAmp: 0.35
+    - _HexPulseSpeed: 1.2
+    - _HexScale: 25.9
+    - _HitAge0: 1
+    - _HitAge1: 1
+    - _HitAge2: 1
+    - _HitAge3: 1
+    - _ImpactRadius: 0.8
+    - _ImpactTime: 0
+    - _IntersectIntensity: 3
+    - _IntersectWidth: 0.5
+    - _MaxRadius: 3
+    - _NoiseScale: 1.5
+    - _NoiseSpeed: 0.38
+    - _NoiseStrength: 0.044
+    - _PulseSpeed: 3
+    - _RimPower: 2.73
+    - _RippleWidth: 0.12
+    - _TriRings: 3
+    - _TriScale: 0.28
+    - _WaveFade: 2.5
+    - _WaveSpeed: 2.2
+    - _WaveWidth: 0.12
+    m_Colors:
+    - _Color: {r: 0.19999996, g: 0.8, b: 1, a: 0.4}
+    - _CoreColor: {r: 0.049999982, g: 0.39999998, b: 1, a: 0.08}
+    - _FlowColor: {r: 0.09999997, g: 0.6, b: 1, a: 1}
+    - _HexLineColor: {r: 0.29999998, g: 0.85, b: 1, a: 1}
+    - _HitPos0: {r: 0, g: 0, b: 0, a: 0}
+    - _HitPos1: {r: 0, g: 0, b: 0, a: 0}
+    - _HitPos2: {r: 0, g: 0, b: 0, a: 0}
+    - _HitPos3: {r: 0, g: 0, b: 0, a: 0}
+    - _ImpactColor: {r: 1, g: 0.85, b: 0.19999996, a: 1}
+    - _ImpactCoreColor: {r: 1, g: 1, b: 1, a: 1}
+    - _ImpactPos: {r: 0, g: 0, b: 0, a: 0}
+    - _IntersectColor: {r: 0, g: 0.89763784, b: 1, a: 1}
+    - _RimColor: {r: 0.29999998, g: 0.85, b: 1, a: 1}
+    - _RippleColor: {r: 0.2, g: 0.9411765, b: 1, a: 1}
+    - _ShieldColor: {r: 0, g: 0, b: 0, a: 0.2}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
