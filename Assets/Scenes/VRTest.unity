@@ -164,6 +164,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ReadingSteinerEffect
   steinerShader: {fileID: 4800000, guid: 797976498a3371b4c93463ed3f7ec08f, type: 3}
   currentIntensity: 0
+--- !u!1 &3936888 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2747255399782225151, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+  m_PrefabInstance: {fileID: 1616043833}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3936892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3936888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8735ba4a84b511748b31ff8a6f7808c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HologramController
+  hologramRenderer: {fileID: 0}
+  playerTransform: {fileID: 673009019}
+  glitchStartDistance: 5
+  glitchMaxDistance: 1.5
+  constantGlitchDistance: 0.5
 --- !u!1 &15178563 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 015125fbf82614440a22bdc02abeaa18, type: 3}
@@ -221,6 +243,28 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4.793801, y: 1.3722557, z: 0.8621216}
   m_Center: {x: -4.4000196, y: 0.58941835, z: -0.06893921}
+--- !u!1 &33184493 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -5958703771784951030, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+  m_PrefabInstance: {fileID: 1616043833}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &33184497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 33184493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8735ba4a84b511748b31ff8a6f7808c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HologramController
+  hologramRenderer: {fileID: 0}
+  playerTransform: {fileID: 673009019}
+  glitchStartDistance: 5
+  glitchMaxDistance: 1.5
+  constantGlitchDistance: 0.5
 --- !u!4 &81383278 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1670256625, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
@@ -1425,6 +1469,94 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &189603711 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4095613924428575650, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+  m_PrefabInstance: {fileID: 1616043833}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &189603715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189603711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8735ba4a84b511748b31ff8a6f7808c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HologramController
+  hologramRenderer: {fileID: 0}
+  playerTransform: {fileID: 673009019}
+  glitchStartDistance: 5
+  glitchMaxDistance: 1.5
+  constantGlitchDistance: 0.5
+--- !u!1 &190402334 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 252021945039873257, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+  m_PrefabInstance: {fileID: 1616043833}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &190402338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 190402334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8735ba4a84b511748b31ff8a6f7808c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HologramController
+  hologramRenderer: {fileID: 0}
+  playerTransform: {fileID: 673009019}
+  glitchStartDistance: 5
+  glitchMaxDistance: 1.5
+  constantGlitchDistance: 0.5
+--- !u!1 &199754970 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -700518583619349650, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+  m_PrefabInstance: {fileID: 1616043833}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &199754974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 199754970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8735ba4a84b511748b31ff8a6f7808c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HologramController
+  hologramRenderer: {fileID: 0}
+  playerTransform: {fileID: 673009019}
+  glitchStartDistance: 5
+  glitchMaxDistance: 1.5
+  constantGlitchDistance: 0.5
+--- !u!1 &201133414 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -5761486888851684539, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+  m_PrefabInstance: {fileID: 1616043833}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &201133418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 201133414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8735ba4a84b511748b31ff8a6f7808c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HologramController
+  hologramRenderer: {fileID: 0}
+  playerTransform: {fileID: 673009019}
+  glitchStartDistance: 5
+  glitchMaxDistance: 1.5
+  constantGlitchDistance: 0.5
 --- !u!1 &211129664
 GameObject:
   m_ObjectHideFlags: 0
@@ -1545,6 +1677,28 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 2081581400}
   m_SourcePrefab: {fileID: 100100000, guid: 887e2cef824578447b62d0d5cdfdd178, type: 3}
+--- !u!1 &238622645 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8582006164694951600, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+  m_PrefabInstance: {fileID: 1616043833}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &238622649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 238622645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8735ba4a84b511748b31ff8a6f7808c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HologramController
+  hologramRenderer: {fileID: 0}
+  playerTransform: {fileID: 673009019}
+  glitchStartDistance: 5
+  glitchMaxDistance: 1.5
+  constantGlitchDistance: 0.5
 --- !u!1001 &259424936
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1755,6 +1909,28 @@ MonoBehaviour:
   glitchStartDistance: 5
   glitchMaxDistance: 1.5
   constantGlitchDistance: 1.5
+--- !u!1 &304110155 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -6552981260108927585, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+  m_PrefabInstance: {fileID: 1616043833}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &304110159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 304110155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8735ba4a84b511748b31ff8a6f7808c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HologramController
+  hologramRenderer: {fileID: 0}
+  playerTransform: {fileID: 673009019}
+  glitchStartDistance: 5
+  glitchMaxDistance: 1.5
+  constantGlitchDistance: 0.5
 --- !u!1001 &334719998
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2473,6 +2649,72 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &415358573 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -4267682592633154621, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+  m_PrefabInstance: {fileID: 1616043833}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &415358577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 415358573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8735ba4a84b511748b31ff8a6f7808c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HologramController
+  hologramRenderer: {fileID: 0}
+  playerTransform: {fileID: 673009019}
+  glitchStartDistance: 5
+  glitchMaxDistance: 1.5
+  constantGlitchDistance: 0.5
+--- !u!1 &415767046 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -2345622174856134167, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+  m_PrefabInstance: {fileID: 1616043833}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &415767050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 415767046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8735ba4a84b511748b31ff8a6f7808c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HologramController
+  hologramRenderer: {fileID: 0}
+  playerTransform: {fileID: 673009019}
+  glitchStartDistance: 5
+  glitchMaxDistance: 1.5
+  constantGlitchDistance: 0.5
+--- !u!1 &433104256 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6263793669613359398, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+  m_PrefabInstance: {fileID: 1616043833}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &433104260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 433104256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8735ba4a84b511748b31ff8a6f7808c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HologramController
+  hologramRenderer: {fileID: 0}
+  playerTransform: {fileID: 673009019}
+  glitchStartDistance: 5
+  glitchMaxDistance: 1.5
+  constantGlitchDistance: 0.5
 --- !u!1 &434019452 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: e770177b9f6b80446b71b35601a764d1, type: 3}
@@ -2796,6 +3038,28 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3320475574715161136, guid: 9138f5a9999a892409523c3ac7a768ab, type: 3}
+--- !u!1 &476462953 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5012742260248020959, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+  m_PrefabInstance: {fileID: 1616043833}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &476462957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 476462953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8735ba4a84b511748b31ff8a6f7808c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HologramController
+  hologramRenderer: {fileID: 0}
+  playerTransform: {fileID: 673009019}
+  glitchStartDistance: 5
+  glitchMaxDistance: 1.5
+  constantGlitchDistance: 0.5
 --- !u!1 &508715435
 GameObject:
   m_ObjectHideFlags: 0
@@ -3146,6 +3410,28 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 697301463}
   m_SourcePrefab: {fileID: 100100000, guid: e770177b9f6b80446b71b35601a764d1, type: 3}
+--- !u!1 &543305140 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1547914276230485216, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+  m_PrefabInstance: {fileID: 1616043833}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &543305144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 543305140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8735ba4a84b511748b31ff8a6f7808c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HologramController
+  hologramRenderer: {fileID: 0}
+  playerTransform: {fileID: 673009019}
+  glitchStartDistance: 5
+  glitchMaxDistance: 1.5
+  constantGlitchDistance: 0.5
 --- !u!1001 &570923859
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3331,6 +3617,50 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 636084034}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &660436984 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -8406716592195083115, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+  m_PrefabInstance: {fileID: 1616043833}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &660436988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 660436984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8735ba4a84b511748b31ff8a6f7808c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HologramController
+  hologramRenderer: {fileID: 0}
+  playerTransform: {fileID: 673009019}
+  glitchStartDistance: 5
+  glitchMaxDistance: 1.5
+  constantGlitchDistance: 0.5
+--- !u!1 &667703245 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -4367176460548086226, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+  m_PrefabInstance: {fileID: 1616043833}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &667703249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 667703245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8735ba4a84b511748b31ff8a6f7808c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HologramController
+  hologramRenderer: {fileID: 0}
+  playerTransform: {fileID: 673009019}
+  glitchStartDistance: 5
+  glitchMaxDistance: 1.5
+  constantGlitchDistance: 0.5
 --- !u!1 &669225579 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: e770177b9f6b80446b71b35601a764d1, type: 3}
@@ -4079,6 +4409,33 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e11c3f4e03b0034fa80ac51ceff0ce9, type: 3}
+--- !u!1 &795404499 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -2929848435034540300, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+  m_PrefabInstance: {fileID: 1616043833}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &795404501 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7142020085749982296, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+  m_PrefabInstance: {fileID: 1616043833}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &795404503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 795404499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8735ba4a84b511748b31ff8a6f7808c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HologramController
+  hologramRenderer: {fileID: 0}
+  playerTransform: {fileID: 673009019}
+  glitchStartDistance: 5
+  glitchMaxDistance: 1.5
+  constantGlitchDistance: 0.5
 --- !u!1 &809076826
 GameObject:
   m_ObjectHideFlags: 0
@@ -4135,6 +4492,28 @@ MonoBehaviour:
     m_HintWeight: 1
     m_MaintainTargetPositionOffset: 0
     m_MaintainTargetRotationOffset: 0
+--- !u!1 &816866711 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -5801263246505496577, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+  m_PrefabInstance: {fileID: 1616043833}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &816866715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 816866711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8735ba4a84b511748b31ff8a6f7808c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HologramController
+  hologramRenderer: {fileID: 0}
+  playerTransform: {fileID: 673009019}
+  glitchStartDistance: 5
+  glitchMaxDistance: 1.5
+  constantGlitchDistance: 0.5
 --- !u!1 &840532054 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
@@ -4430,6 +4809,94 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5fc8ea62d73cf2b4886c83b83e9eb8ed, type: 3}
+--- !u!1 &926280698 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -8366494209587832330, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+  m_PrefabInstance: {fileID: 1616043833}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &926280702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 926280698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8735ba4a84b511748b31ff8a6f7808c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HologramController
+  hologramRenderer: {fileID: 0}
+  playerTransform: {fileID: 673009019}
+  glitchStartDistance: 5
+  glitchMaxDistance: 1.5
+  constantGlitchDistance: 0.5
+--- !u!1 &953363190 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -2158506675858201151, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+  m_PrefabInstance: {fileID: 1616043833}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &953363194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 953363190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8735ba4a84b511748b31ff8a6f7808c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HologramController
+  hologramRenderer: {fileID: 0}
+  playerTransform: {fileID: 673009019}
+  glitchStartDistance: 5
+  glitchMaxDistance: 1.5
+  constantGlitchDistance: 0.5
+--- !u!1 &1011039290 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6679991503807748843, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+  m_PrefabInstance: {fileID: 1616043833}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1011039294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1011039290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8735ba4a84b511748b31ff8a6f7808c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HologramController
+  hologramRenderer: {fileID: 0}
+  playerTransform: {fileID: 673009019}
+  glitchStartDistance: 5
+  glitchMaxDistance: 1.5
+  constantGlitchDistance: 0.5
+--- !u!1 &1017992457 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1540484302590034209, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+  m_PrefabInstance: {fileID: 1616043833}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1017992461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1017992457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8735ba4a84b511748b31ff8a6f7808c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HologramController
+  hologramRenderer: {fileID: 0}
+  playerTransform: {fileID: 673009019}
+  glitchStartDistance: 5
+  glitchMaxDistance: 1.5
+  constantGlitchDistance: 0.5
 --- !u!4 &1069564150 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 452845707996361441, guid: 84ad9e202a8814845a23f108503e0301, type: 3}
@@ -4466,6 +4933,72 @@ Transform:
   m_Children: []
   m_Father: {fileID: 211129667}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1111408050 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -1624489589252318197, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+  m_PrefabInstance: {fileID: 1616043833}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1111408054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111408050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8735ba4a84b511748b31ff8a6f7808c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HologramController
+  hologramRenderer: {fileID: 795404501}
+  playerTransform: {fileID: 673009019}
+  glitchStartDistance: 5
+  glitchMaxDistance: 1.5
+  constantGlitchDistance: 0.5
+--- !u!1 &1123704633 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -5426087689937967254, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+  m_PrefabInstance: {fileID: 1616043833}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1123704637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1123704633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8735ba4a84b511748b31ff8a6f7808c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HologramController
+  hologramRenderer: {fileID: 0}
+  playerTransform: {fileID: 673009019}
+  glitchStartDistance: 5
+  glitchMaxDistance: 1.5
+  constantGlitchDistance: 0.5
+--- !u!1 &1136531400 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5851263379943825661, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+  m_PrefabInstance: {fileID: 1616043833}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1136531404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1136531400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8735ba4a84b511748b31ff8a6f7808c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HologramController
+  hologramRenderer: {fileID: 0}
+  playerTransform: {fileID: 673009019}
+  glitchStartDistance: 5
+  glitchMaxDistance: 1.5
+  constantGlitchDistance: 0.5
 --- !u!1001 &1190784004
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4524,6 +5057,28 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 62c4b82637ac801448b68179a9611d19, type: 3}
+--- !u!1 &1212577133 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -27534952465105732, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+  m_PrefabInstance: {fileID: 1616043833}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1212577137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1212577133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8735ba4a84b511748b31ff8a6f7808c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HologramController
+  hologramRenderer: {fileID: 0}
+  playerTransform: {fileID: 673009019}
+  glitchStartDistance: 5
+  glitchMaxDistance: 1.5
+  constantGlitchDistance: 0.5
 --- !u!1001 &1238418193
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4783,6 +5338,28 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1715185989}
   m_SourcePrefab: {fileID: 100100000, guid: 84ad9e202a8814845a23f108503e0301, type: 3}
+--- !u!1 &1243065012 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2083521019893003289, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+  m_PrefabInstance: {fileID: 1616043833}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1243065016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1243065012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8735ba4a84b511748b31ff8a6f7808c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HologramController
+  hologramRenderer: {fileID: 0}
+  playerTransform: {fileID: 673009019}
+  glitchStartDistance: 5
+  glitchMaxDistance: 1.5
+  constantGlitchDistance: 0.5
 --- !u!1001 &1289638471
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4978,6 +5555,28 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1310157376}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1344580890 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -1280023396463559510, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+  m_PrefabInstance: {fileID: 1616043833}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1344580894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1344580890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8735ba4a84b511748b31ff8a6f7808c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HologramController
+  hologramRenderer: {fileID: 0}
+  playerTransform: {fileID: 673009019}
+  glitchStartDistance: 5
+  glitchMaxDistance: 1.5
+  constantGlitchDistance: 0.5
 --- !u!1 &1348072661
 GameObject:
   m_ObjectHideFlags: 0
@@ -5090,6 +5689,28 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1348072661}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1358024116 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1859098511918768188, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+  m_PrefabInstance: {fileID: 1616043833}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1358024120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1358024116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8735ba4a84b511748b31ff8a6f7808c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HologramController
+  hologramRenderer: {fileID: 0}
+  playerTransform: {fileID: 673009019}
+  glitchStartDistance: 5
+  glitchMaxDistance: 1.5
+  constantGlitchDistance: 0.5
 --- !u!1001 &1363876414
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5163,6 +5784,28 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 367eabd9b7b79ce4cbb800902daa6842, type: 3}
+--- !u!1 &1372671585 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -2284719806678210851, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+  m_PrefabInstance: {fileID: 1616043833}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1372671589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1372671585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8735ba4a84b511748b31ff8a6f7808c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HologramController
+  hologramRenderer: {fileID: 0}
+  playerTransform: {fileID: 673009019}
+  glitchStartDistance: 5
+  glitchMaxDistance: 1.5
+  constantGlitchDistance: 0.5
 --- !u!1 &1388197991
 GameObject:
   m_ObjectHideFlags: 0
@@ -5209,6 +5852,72 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1408979866 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -7825527078014406352, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+  m_PrefabInstance: {fileID: 1616043833}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1408979870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1408979866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8735ba4a84b511748b31ff8a6f7808c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HologramController
+  hologramRenderer: {fileID: 0}
+  playerTransform: {fileID: 673009019}
+  glitchStartDistance: 5
+  glitchMaxDistance: 1.5
+  constantGlitchDistance: 0.5
+--- !u!1 &1436896556 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4760329303896918369, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+  m_PrefabInstance: {fileID: 1616043833}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1436896560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1436896556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8735ba4a84b511748b31ff8a6f7808c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HologramController
+  hologramRenderer: {fileID: 0}
+  playerTransform: {fileID: 673009019}
+  glitchStartDistance: 5
+  glitchMaxDistance: 1.5
+  constantGlitchDistance: 0.5
+--- !u!1 &1517398270 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7067323657040274488, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+  m_PrefabInstance: {fileID: 1616043833}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1517398274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1517398270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8735ba4a84b511748b31ff8a6f7808c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HologramController
+  hologramRenderer: {fileID: 0}
+  playerTransform: {fileID: 673009019}
+  glitchStartDistance: 5
+  glitchMaxDistance: 1.5
+  constantGlitchDistance: 0.5
 --- !u!1001 &1539797030
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5573,6 +6282,132 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1616043835}
+    - targetCorrespondingSourceObject: {fileID: -2158506675858201151, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 953363194}
+    - targetCorrespondingSourceObject: {fileID: -7825527078014406352, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1408979870}
+    - targetCorrespondingSourceObject: {fileID: -4367176460548086226, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 667703249}
+    - targetCorrespondingSourceObject: {fileID: -8366494209587832330, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 926280702}
+    - targetCorrespondingSourceObject: {fileID: -4341493491879128944, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1965846706}
+    - targetCorrespondingSourceObject: {fileID: 7915186280210164459, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1914122604}
+    - targetCorrespondingSourceObject: {fileID: -6552981260108927585, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 304110159}
+    - targetCorrespondingSourceObject: {fileID: -8406716592195083115, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 660436988}
+    - targetCorrespondingSourceObject: {fileID: 5463095469249825372, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1657670551}
+    - targetCorrespondingSourceObject: {fileID: -27534952465105732, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1212577137}
+    - targetCorrespondingSourceObject: {fileID: 7247914733597175076, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1877888734}
+    - targetCorrespondingSourceObject: {fileID: 1547914276230485216, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 543305144}
+    - targetCorrespondingSourceObject: {fileID: 5012742260248020959, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 476462957}
+    - targetCorrespondingSourceObject: {fileID: 5663789470223161814, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2140283060}
+    - targetCorrespondingSourceObject: {fileID: -5426087689937967254, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1123704637}
+    - targetCorrespondingSourceObject: {fileID: -1280023396463559510, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1344580894}
+    - targetCorrespondingSourceObject: {fileID: -700518583619349650, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 199754974}
+    - targetCorrespondingSourceObject: {fileID: -2345622174856134167, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 415767050}
+    - targetCorrespondingSourceObject: {fileID: -9022268083084843818, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1813049082}
+    - targetCorrespondingSourceObject: {fileID: 2747255399782225151, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3936892}
+    - targetCorrespondingSourceObject: {fileID: -2284719806678210851, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1372671589}
+    - targetCorrespondingSourceObject: {fileID: 4760329303896918369, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1436896560}
+    - targetCorrespondingSourceObject: {fileID: -5958703771784951030, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 33184497}
+    - targetCorrespondingSourceObject: {fileID: 8582006164694951600, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 238622649}
+    - targetCorrespondingSourceObject: {fileID: 6679991503807748843, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1011039294}
+    - targetCorrespondingSourceObject: {fileID: -869026718345136710, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1967859831}
+    - targetCorrespondingSourceObject: {fileID: 6263793669613359398, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 433104260}
+    - targetCorrespondingSourceObject: {fileID: -5801263246505496577, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 816866715}
+    - targetCorrespondingSourceObject: {fileID: 327268898510371792, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1973247669}
+    - targetCorrespondingSourceObject: {fileID: 1540484302590034209, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1017992461}
+    - targetCorrespondingSourceObject: {fileID: 5851263379943825661, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1136531404}
+    - targetCorrespondingSourceObject: {fileID: 252021945039873257, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 190402338}
+    - targetCorrespondingSourceObject: {fileID: 4095613924428575650, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 189603715}
+    - targetCorrespondingSourceObject: {fileID: 2083521019893003289, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1243065016}
+    - targetCorrespondingSourceObject: {fileID: 7067323657040274488, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1517398274}
+    - targetCorrespondingSourceObject: {fileID: -5690885646645518070, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1726424996}
+    - targetCorrespondingSourceObject: {fileID: -5761486888851684539, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 201133418}
+    - targetCorrespondingSourceObject: {fileID: -1624489589252318197, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1111408054}
+    - targetCorrespondingSourceObject: {fileID: -4267682592633154621, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 415358577}
+    - targetCorrespondingSourceObject: {fileID: 5775871876540322575, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2126964283}
+    - targetCorrespondingSourceObject: {fileID: 1859098511918768188, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1358024120}
+    - targetCorrespondingSourceObject: {fileID: -2929848435034540300, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 795404503}
   m_SourcePrefab: {fileID: 100100000, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
 --- !u!1 &1616043834 stripped
 GameObject:
@@ -5813,6 +6648,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8606713579289776443, guid: 84ad9e202a8814845a23f108503e0301, type: 3}
   m_PrefabInstance: {fileID: 1238418193}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1657670547 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5463095469249825372, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+  m_PrefabInstance: {fileID: 1616043833}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1657670551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1657670547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8735ba4a84b511748b31ff8a6f7808c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HologramController
+  hologramRenderer: {fileID: 0}
+  playerTransform: {fileID: 673009019}
+  glitchStartDistance: 5
+  glitchMaxDistance: 1.5
+  constantGlitchDistance: 0.5
 --- !u!1 &1658408455
 GameObject:
   m_ObjectHideFlags: 0
@@ -6035,6 +6892,28 @@ MonoBehaviour:
   turnSmoothness: 5
   headHeight: 1.8
   bodyRotationOffset: 180
+--- !u!1 &1726424992 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -5690885646645518070, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+  m_PrefabInstance: {fileID: 1616043833}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1726424996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1726424992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8735ba4a84b511748b31ff8a6f7808c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HologramController
+  hologramRenderer: {fileID: 0}
+  playerTransform: {fileID: 673009019}
+  glitchStartDistance: 5
+  glitchMaxDistance: 1.5
+  constantGlitchDistance: 0.5
 --- !u!4 &1729102506 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -700029363859958133, guid: 84ad9e202a8814845a23f108503e0301, type: 3}
@@ -6363,6 +7242,28 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1800466109}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1813049078 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -9022268083084843818, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+  m_PrefabInstance: {fileID: 1616043833}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1813049082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1813049078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8735ba4a84b511748b31ff8a6f7808c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HologramController
+  hologramRenderer: {fileID: 0}
+  playerTransform: {fileID: 673009019}
+  glitchStartDistance: 5
+  glitchMaxDistance: 1.5
+  constantGlitchDistance: 0.5
 --- !u!4 &1814704463 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 202364688, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
@@ -6400,6 +7301,28 @@ Transform:
   - {fileID: 1658408456}
   m_Father: {fileID: 159151052}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1877888730 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7247914733597175076, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+  m_PrefabInstance: {fileID: 1616043833}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1877888734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1877888730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8735ba4a84b511748b31ff8a6f7808c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HologramController
+  hologramRenderer: {fileID: 0}
+  playerTransform: {fileID: 673009019}
+  glitchStartDistance: 5
+  glitchMaxDistance: 1.5
+  constantGlitchDistance: 0.5
 --- !u!1 &1892059358
 GameObject:
   m_ObjectHideFlags: 0
@@ -6517,6 +7440,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -1486527654978891383, guid: 84ad9e202a8814845a23f108503e0301, type: 3}
   m_PrefabInstance: {fileID: 1238418193}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1914122600 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7915186280210164459, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+  m_PrefabInstance: {fileID: 1616043833}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1914122604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1914122600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8735ba4a84b511748b31ff8a6f7808c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HologramController
+  hologramRenderer: {fileID: 0}
+  playerTransform: {fileID: 673009019}
+  glitchStartDistance: 5
+  glitchMaxDistance: 1.5
+  constantGlitchDistance: 0.5
 --- !u!1 &1921214995
 GameObject:
   m_ObjectHideFlags: 0
@@ -6709,6 +7654,72 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 133301568}
   m_SourcePrefab: {fileID: 100100000, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+--- !u!1 &1965846702 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -4341493491879128944, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+  m_PrefabInstance: {fileID: 1616043833}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1965846706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1965846702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8735ba4a84b511748b31ff8a6f7808c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HologramController
+  hologramRenderer: {fileID: 0}
+  playerTransform: {fileID: 673009019}
+  glitchStartDistance: 5
+  glitchMaxDistance: 1.5
+  constantGlitchDistance: 0.5
+--- !u!1 &1967859827 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -869026718345136710, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+  m_PrefabInstance: {fileID: 1616043833}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1967859831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1967859827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8735ba4a84b511748b31ff8a6f7808c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HologramController
+  hologramRenderer: {fileID: 0}
+  playerTransform: {fileID: 673009019}
+  glitchStartDistance: 5
+  glitchMaxDistance: 1.5
+  constantGlitchDistance: 0.5
+--- !u!1 &1973247665 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 327268898510371792, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+  m_PrefabInstance: {fileID: 1616043833}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1973247669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1973247665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8735ba4a84b511748b31ff8a6f7808c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HologramController
+  hologramRenderer: {fileID: 0}
+  playerTransform: {fileID: 673009019}
+  glitchStartDistance: 5
+  glitchMaxDistance: 1.5
+  constantGlitchDistance: 0.5
 --- !u!1001 &1999445384
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7565,6 +8576,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2126964279 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5775871876540322575, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+  m_PrefabInstance: {fileID: 1616043833}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2126964283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2126964279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8735ba4a84b511748b31ff8a6f7808c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HologramController
+  hologramRenderer: {fileID: 0}
+  playerTransform: {fileID: 673009019}
+  glitchStartDistance: 5
+  glitchMaxDistance: 1.5
+  constantGlitchDistance: 0.5
+--- !u!1 &2140283056 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5663789470223161814, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
+  m_PrefabInstance: {fileID: 1616043833}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2140283060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2140283056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8735ba4a84b511748b31ff8a6f7808c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HologramController
+  hologramRenderer: {fileID: 0}
+  playerTransform: {fileID: 673009019}
+  glitchStartDistance: 5
+  glitchMaxDistance: 1.5
+  constantGlitchDistance: 0.5
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
