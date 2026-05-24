@@ -15,6 +15,8 @@ public class BlackHoleActivationButton : MonoBehaviour
 
     [Header("Behavior")]
     [SerializeField] private bool disableButtonAfterUse = true;
+    
+    public bool IsMicrowaveOn { get; private set; } = false;
 
     private bool hasTriggered;
 
@@ -47,6 +49,8 @@ public class BlackHoleActivationButton : MonoBehaviour
     private IEnumerator EnableAndPlayAnomaly()
     {
         hasTriggered = true;
+
+        IsMicrowaveOn = true;
 
         if (anomalyRoot != null && !anomalyRoot.activeSelf)
             anomalyRoot.SetActive(true);
