@@ -164,17 +164,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ReadingSteinerEffect
   steinerShader: {fileID: 4800000, guid: 797976498a3371b4c93463ed3f7ec08f, type: 3}
   currentIntensity: 0
---- !u!114 &1784043 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6232745470614056083, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
-  m_PrefabInstance: {fileID: 1685250894}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1784035}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2fadf230d1919748a9aa21d40f74619, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3936888 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2747255399782225151, guid: 5cc62e9470a78924b8c7275599c5fa33, type: 3}
@@ -4512,6 +4501,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1717954561962503726, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
   m_PrefabInstance: {fileID: 1685250894}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &673009020 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1178791450436251564, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+  m_PrefabInstance: {fileID: 1685250894}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0cb9aa70a22847b5925ee5f067c10a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &695805177
 GameObject:
   m_ObjectHideFlags: 0
@@ -13465,7 +13465,7 @@ MonoBehaviour:
   xrCamera: {fileID: 1784041}
   xrLeftController: {fileID: 1814704463}
   xrRightController: {fileID: 81383278}
-  headPositionOffset: {x: 0, y: 0, z: 0}
+  headPositionOffset: {x: 0, y: -0.15, z: 0}
   headRotationOffset: {x: 90, y: 0, z: 0}
   handPositionOffset: {x: 0, y: 0, z: 0}
   leftHandRotationOffset: {x: 250, y: -55, z: -1221}
@@ -13966,7 +13966,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1865364713}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.5, y: 0.5, z: -0.5, w: 0.5}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.007099991, y: -0.0279, z: -0.06}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
@@ -14913,10 +14913,10 @@ MonoBehaviour:
   readingSteinerEffect: {fileID: 1784042}
   rampDuration: 2.5
   maxIntensity: 1.2
-  player: {fileID: 673009019}
+  xrOrigin: {fileID: 673009020}
   cloneRoomTP: {fileID: 1865364714}
   startRoomTP: {fileID: 1799301591}
-  cctvEffect: {fileID: 1784043}
+  cctvEffect: {fileID: 1784037}
   objectsOff: []
   objectsOn: []
 --- !u!65 &2035918534

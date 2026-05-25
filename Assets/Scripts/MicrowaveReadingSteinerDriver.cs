@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
+using Unity.XR.CoreUtils; // NEW: Required for official flawless VR teleportation
 
 [RequireComponent(typeof(XRGrabInteractable))]
 public class MicrowaveReadingSteinerDriver : MonoBehaviour
@@ -15,13 +16,14 @@ public class MicrowaveReadingSteinerDriver : MonoBehaviour
     [SerializeField] private float rampDuration = 2.5f;
     [SerializeField] private float maxIntensity = 1.2f;
 
-    [Header("Teleport Settings")]
-    [SerializeField] private Transform player;
+    [Header("Teleport Settings (Official API)")]
+    [Tooltip("Drag the top-level XR Origin object here to link the XROrigin component")]
+    [SerializeField] private XROrigin xrOrigin; 
     [SerializeField] private Transform cloneRoomTP;
     [SerializeField] private Transform startRoomTP;
 
     [Header("Worldline State")]
-    [SerializeField] private MonoBehaviour cctvEffect;
+    [SerializeField] private CCTVGlitchEffect cctvEffect;
     [SerializeField] private GameObject[] objectsOff;
     [SerializeField] private GameObject[] objectsOn;
 
@@ -40,7 +42,6 @@ public class MicrowaveReadingSteinerDriver : MonoBehaviour
     private void OnEnable()
     {
         if (grabInteractable == null) return;
-
         grabInteractable.selectEntered.AddListener(OnGrabbed);
         grabInteractable.selectExited.AddListener(OnReleased);
         grabInteractable.activated.AddListener(OnActivated);
@@ -49,23 +50,13 @@ public class MicrowaveReadingSteinerDriver : MonoBehaviour
     private void OnDisable()
     {
         if (grabInteractable == null) return;
-
         grabInteractable.selectEntered.RemoveListener(OnGrabbed);
         grabInteractable.selectExited.RemoveListener(OnReleased);
         grabInteractable.activated.RemoveListener(OnActivated);
     }
 
-    private void OnGrabbed(SelectEnterEventArgs args)
-    {
-        isHeld = true;
-    }
-
-    private void OnReleased(SelectExitEventArgs args)
-    {
-        isHeld = false;
-        // Não cancelamos a Coroutine aqui! 
-        // Se a viagem no tempo começou, tem de acabar, mesmo que o jogador largue o item.
-    }
+    private void OnGrabbed(SelectEnterEventArgs args) { isHeld = true; }
+    private void OnReleased(SelectExitEventArgs args) { isHeld = false; }
 
     private void OnActivated(ActivateEventArgs args)
     {
@@ -73,14 +64,16 @@ public class MicrowaveReadingSteinerDriver : MonoBehaviour
         if (microwaveSwitch == null || !microwaveSwitch.IsMicrowaveOn) return;
         if (readingSteinerEffect == null) return;
 
-        // Só permite ativar se não estiver já a decorrer uma viagem
         if (shiftCoroutine == null)
             shiftCoroutine = StartCoroutine(WorldlineShiftSequence());
     }
 
     private IEnumerator WorldlineShiftSequence()
     {
-        // 1. Build-up (Distorção a aumentar)
+        // FORCE THE COMPONENT ON so the shader actually runs even if unchecked in the Inspector
+        readingSteinerEffect.enabled = true; 
+
+        // 1. Build-up
         float elapsed = 0f;
         while (elapsed < rampDuration)
         {
@@ -90,42 +83,49 @@ public class MicrowaveReadingSteinerDriver : MonoBehaviour
             yield return null;
         }
 
-        // 2. Clímax da distorção
+        // 2. Climax
         readingSteinerEffect.currentIntensity = maxIntensity;
         yield return new WaitForSeconds(0.4f);
 
-        // 3. Teleporte para a Sala dos Clones
-        if (player != null && cloneRoomTP != null) TeleportPlayer(cloneRoomTP);
+        // 3. Teleport to Clone Room
+        if (xrOrigin != null && cloneRoomTP != null) 
+            ProVRTeleport(cloneRoomTP);
+            
         if (cctvEffect != null) cctvEffect.enabled = true;
         
-        readingSteinerEffect.currentIntensity = 0f; // Ecrã volta ao "normal" (com o CCTV ligado)
+        readingSteinerEffect.currentIntensity = 0f; 
+        readingSteinerEffect.enabled = false; // Turn off to save performance
 
-        // 4. Choque Psicológico na sala
+        // 4. Psychological Shock (Wait in the Tesseract)
         yield return new WaitForSeconds(5.0f);
 
-        // 5. Salto de volta (Violento)
+        // 5. Violent Snap Back
+        readingSteinerEffect.enabled = true; // FORCE ON AGAIN
         readingSteinerEffect.currentIntensity = maxIntensity;
         yield return new WaitForSeconds(0.2f);
 
-        // 6. Estabelecer nova Worldline (Teleporte de volta + Objetos)
-        if (player != null && startRoomTP != null) TeleportPlayer(startRoomTP);
-        if (cctvEffect != null) cctvEffect.enabled = false;
-
+        // 6. Establish New Worldline
+        if (xrOrigin != null && startRoomTP != null) 
+            ProVRTeleport(startRoomTP);
+            
         foreach (var obj in objectsOff) if (obj != null) obj.SetActive(false);
         foreach (var obj in objectsOn) if (obj != null) obj.SetActive(true);
 
-        // Fim da sequência
         readingSteinerEffect.currentIntensity = 0f;
+        readingSteinerEffect.enabled = false; // Turn off for good
+        
         shiftCoroutine = null;
     }
 
-    private void TeleportPlayer(Transform targetTP)
+    // NEW: Flawless Native XR Teleport Math
+    private void ProVRTeleport(Transform targetTP)
     {
-        CharacterController cc = player.GetComponent<CharacterController>();
-        if (cc != null) cc.enabled = false; // Desativar colisão para o VR não bloquear o TP
+        CharacterController cc = xrOrigin.GetComponent<CharacterController>();
+        if (cc != null) cc.enabled = false; // Disable so physics don't block the teleport
 
-        player.position = targetTP.position;
-        player.rotation = targetTP.rotation;
+        // Unity's built-in API automatically calculates the camera offset and rotation math safely
+        xrOrigin.MoveCameraToWorldLocation(targetTP.position);
+        xrOrigin.MatchOriginUpCameraForward(targetTP.up, targetTP.forward);
 
         if (cc != null) cc.enabled = true;
     }
