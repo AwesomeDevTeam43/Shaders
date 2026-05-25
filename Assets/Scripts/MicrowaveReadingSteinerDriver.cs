@@ -21,7 +21,7 @@ public class MicrowaveReadingSteinerDriver : MonoBehaviour
     [SerializeField] private Transform startRoomTP;
 
     [Header("Worldline State")]
-    [SerializeField] private MonoBehaviour cctvEffect;
+    [SerializeField] private CCTVGlitchEffect cctvEffect;
     [SerializeField] private GameObject[] objectsOff;
     [SerializeField] private GameObject[] objectsOn;
     
