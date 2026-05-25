@@ -24,6 +24,10 @@ public class MicrowaveReadingSteinerDriver : MonoBehaviour
     [SerializeField] private MonoBehaviour cctvEffect;
     [SerializeField] private GameObject[] objectsOff;
     [SerializeField] private GameObject[] objectsOn;
+    
+    [Header("Hologramas")]
+    [Tooltip("Arrasta para aqui os objetos Pais que têm o script HologramController")]
+    [SerializeField] private HologramController[] hologramasParaAtivar;
 
     private Coroutine shiftCoroutine;
     private bool isHeld;
@@ -63,8 +67,6 @@ public class MicrowaveReadingSteinerDriver : MonoBehaviour
     private void OnReleased(SelectExitEventArgs args)
     {
         isHeld = false;
-        // Não cancelamos a Coroutine aqui! 
-        // Se a viagem no tempo começou, tem de acabar, mesmo que o jogador largue o item.
     }
 
     private void OnActivated(ActivateEventArgs args)
@@ -73,14 +75,13 @@ public class MicrowaveReadingSteinerDriver : MonoBehaviour
         if (microwaveSwitch == null || !microwaveSwitch.IsMicrowaveOn) return;
         if (readingSteinerEffect == null) return;
 
-        // Só permite ativar se não estiver já a decorrer uma viagem
         if (shiftCoroutine == null)
             shiftCoroutine = StartCoroutine(WorldlineShiftSequence());
     }
 
     private IEnumerator WorldlineShiftSequence()
     {
-        // 1. Build-up (Distorção a aumentar)
+        // 1. Build-up
         float elapsed = 0f;
         while (elapsed < rampDuration)
         {
@@ -90,31 +91,46 @@ public class MicrowaveReadingSteinerDriver : MonoBehaviour
             yield return null;
         }
 
-        // 2. Clímax da distorção
+        // 2. Clímax
         readingSteinerEffect.currentIntensity = maxIntensity;
         yield return new WaitForSeconds(0.4f);
 
-        // 3. Teleporte para a Sala dos Clones
+        // 3. Teleporte para Sala dos Clones
         if (player != null && cloneRoomTP != null) TeleportPlayer(cloneRoomTP);
         if (cctvEffect != null) cctvEffect.enabled = true;
         
-        readingSteinerEffect.currentIntensity = 0f; // Ecrã volta ao "normal" (com o CCTV ligado)
+        readingSteinerEffect.currentIntensity = 0f; 
 
-        // 4. Choque Psicológico na sala
+        // 4. Choque Psicológico
         yield return new WaitForSeconds(5.0f);
 
-        // 5. Salto de volta (Violento)
+        // 5. Regresso Violento
         readingSteinerEffect.currentIntensity = maxIntensity;
         yield return new WaitForSeconds(0.2f);
 
-        // 6. Estabelecer nova Worldline (Teleporte de volta + Objetos)
+        // 6. Estabelecer nova Worldline
         if (player != null && startRoomTP != null) TeleportPlayer(startRoomTP);
         if (cctvEffect != null) cctvEffect.enabled = false;
 
         foreach (var obj in objectsOff) if (obj != null) obj.SetActive(false);
         foreach (var obj in objectsOn) if (obj != null) obj.SetActive(true);
 
-        // Fim da sequência
+        // -------------------------------------------------------------
+        // NOVA LÓGICA: Ativar os Controladores de Holograma
+        // -------------------------------------------------------------
+        if (hologramasParaAtivar != null)
+        {
+            foreach (HologramController hc in hologramasParaAtivar)
+            {
+                if (hc != null)
+                {
+                    // Ligar o script faz com que o Start() dele corra, 
+                    // substituindo os materiais todos automaticamente!
+                    hc.enabled = true; 
+                }
+            }
+        }
+
         readingSteinerEffect.currentIntensity = 0f;
         shiftCoroutine = null;
     }
@@ -122,7 +138,7 @@ public class MicrowaveReadingSteinerDriver : MonoBehaviour
     private void TeleportPlayer(Transform targetTP)
     {
         CharacterController cc = player.GetComponent<CharacterController>();
-        if (cc != null) cc.enabled = false; // Desativar colisão para o VR não bloquear o TP
+        if (cc != null) cc.enabled = false; 
 
         player.position = targetTP.position;
         player.rotation = targetTP.rotation;
