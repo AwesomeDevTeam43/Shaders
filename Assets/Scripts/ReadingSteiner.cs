@@ -11,6 +11,16 @@ public class ReadingSteinerEffect : MonoBehaviour
     [Header("Current State")]
     [Range(0f, 1.5f)] public float currentIntensity = 0f;
 
+    [Header("TP Settings")]
+    public Transform player;
+    public Transform cloneRoomTP;
+    public Transform startRoomTP;
+
+    [Header("Effects Settings")]
+    public MonoBehaviour cctvEffect;
+    public GameObject[] objectsOff;
+    public GameObject[] objectsOn;
+
     void Start()
     {
         if (steinerShader == null)
@@ -45,15 +55,58 @@ public class ReadingSteinerEffect : MonoBehaviour
 
         // 2. The Climax (Hold at max intensity so the screen is completely garbled)
         currentIntensity = 1.2f; 
-        
-        // ==========================================
-        // DO YOUR SCENE LOADING OR TELEPORTING HERE!
-        // ==========================================
-        
         yield return new WaitForSeconds(0.4f); // Hold the glitch for a fraction of a second
 
+        if (player != null && cloneRoomTP != null)
+        {
+            TeleportPlayer(cloneRoomTP);
+        }
+
+        if(cctvEffect != null)
+        {
+            cctvEffect.enabled = true; // Enable the CCTV effect for the clone room
+        }
+
+        yield return new WaitForSeconds(5.0f); 
+
+        currentIntensity = 1.2f;
+        yield return new WaitForSeconds(0.2f);
+
+        if (player != null && startRoomTP != null)
+        {
+            TeleportPlayer(startRoomTP);
+        }
+
+        if(cctvEffect != null)
+        {
+            cctvEffect.enabled = false; // Disable the CCTV effect when back in the start room
+        }
+
+        foreach(GameObject obj in objectsOff)
+        {
+            if(obj != null) obj.SetActive(false);
+        }
+        foreach(GameObject obj in objectsOn)
+        {
+            if(obj != null) obj.SetActive(true);
+        }
         // 3. The Snap Back (Worldline established)
         currentIntensity = 0f;
+    }
+
+    private void TeleportPlayer(Transform targetTP)
+    {
+        CharacterController cc = player.GetComponent<CharacterController>();
+        if(cc != null)
+        {
+            cc.enabled = false;
+        }
+        player.position = targetTP.position;
+        player.rotation = targetTP.rotation;
+        if(cc != null)
+        {
+            cc.enabled = true;
+        }
     }
 
     void OnRenderImage(RenderTexture source, RenderTexture destination)
