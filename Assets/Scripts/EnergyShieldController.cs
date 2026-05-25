@@ -1,11 +1,6 @@
 using System.Collections;
 using UnityEngine;
 
-/// <summary>
-/// Attach to the EnergyShield GameObject.
-/// Listens for collisions/triggers, feeds _ImpactPos and _ImpactTime
-/// to the EnergyShield shader so the geometry burst plays at the hit point.
-/// </summary>
 [RequireComponent(typeof(Collider))]
 public class EnergyShieldController : MonoBehaviour
 {
@@ -33,23 +28,17 @@ public class EnergyShieldController : MonoBehaviour
         _mat.SetFloat(ImpactTimeID, 0f);
     }
 
-    // ── Collision API ──────────────────────────────────────────────────────
-
     void OnCollisionEnter(Collision col)
     {
-        // First contact point in world space
         TriggerImpact(col.contacts[0].point);
     }
 
     void OnTriggerEnter(Collider other)
     {
-        // Use the closest point on the shield's collider to the incoming object
         Vector3 impactPoint = GetComponent<Collider>()
                               .ClosestPoint(other.transform.position);
         TriggerImpact(impactPoint);
     }
-
-    // ── Public API (call from projectile scripts, etc.) ────────────────────
 
     public void TriggerImpact(Vector3 worldPosition, float radius = 0.6f)
     {
@@ -64,8 +53,6 @@ public class EnergyShieldController : MonoBehaviour
         _animCoroutine = StartCoroutine(AnimateImpact());
     }
 
-    // ── Coroutine: drives _ImpactTime from 0 → 1 ──────────────────────────
-
     IEnumerator AnimateImpact()
     {
         float t = 0f;
@@ -75,7 +62,7 @@ public class EnergyShieldController : MonoBehaviour
             _mat.SetFloat(ImpactTimeID, Mathf.Clamp01(t));
             yield return null;
         }
-        _mat.SetFloat(ImpactTimeID, 0f);   // Reset so geometry returns to normal
+        _mat.SetFloat(ImpactTimeID, 0f);
     }
 
     void OnDestroy()
