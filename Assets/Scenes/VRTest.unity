@@ -164,12 +164,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ReadingSteinerEffect
   steinerShader: {fileID: 4800000, guid: 797976498a3371b4c93463ed3f7ec08f, type: 3}
   currentIntensity: 0
-  player: {fileID: 673009019}
-  cloneRoomTP: {fileID: 1865364714}
-  startRoomTP: {fileID: 1799301591}
-  cctvEffect: {fileID: 1784043}
-  objectsOff: []
-  objectsOn: []
 --- !u!114 &1784043 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6232745470614056083, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
@@ -14408,6 +14402,12 @@ MonoBehaviour:
   readingSteinerEffect: {fileID: 1784042}
   rampDuration: 2.5
   maxIntensity: 1.2
+  player: {fileID: 673009019}
+  cloneRoomTP: {fileID: 1865364714}
+  startRoomTP: {fileID: 1799301591}
+  cctvEffect: {fileID: 1784043}
+  objectsOff: []
+  objectsOn: []
 --- !u!65 &2035918534
 BoxCollider:
   m_ObjectHideFlags: 0
