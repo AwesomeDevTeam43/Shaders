@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
-using UnityEngine.XR.Interaction.Toolkit.Interactables; // Necessário para as versões mais recentes do XR Toolkit
+using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 [RequireComponent(typeof(XRGrabInteractable))]
 public class MicrowaveReadingSteinerDriver : MonoBehaviour
@@ -27,16 +27,15 @@ public class MicrowaveReadingSteinerDriver : MonoBehaviour
     [Tooltip("Objetos a MOSTRAR na nova realidade (Ex: O Quad do Portal e a Esfera)")]
     [SerializeField] private GameObject[] objectsOn;
     
-    [Header("Hologramas (Automático por Pais)")]
+    [Header("Hologramas Dinâmicos")]
     [Tooltip("Arrasta o material do Holograma para aqui")]
     [SerializeField] private Material materialHolograma;
-    [Tooltip("Arrasta para aqui os objetos PAIS. O script vai transformar o pai e TODOS os seus filhos.")]
+    [Tooltip("Arrasta para aqui os objetos PAIS. O código vai injetar o script neles!")]
     [SerializeField] private Transform[] paisParaHolograma;
 
     private Coroutine shiftCoroutine;
     private bool isHeld;
 
-    // --- LÓGICA DE VR RESTAURADA ---
     private void Awake()
     {
         if (grabInteractable == null)
@@ -75,24 +74,19 @@ public class MicrowaveReadingSteinerDriver : MonoBehaviour
     private void OnActivated(ActivateEventArgs args)
     {
         if (!isHeld) return;
-        
-        // Se o teu microondas precisar de estar ligado primeiro, esta linha garante isso
         if (microwaveSwitch == null || !microwaveSwitch.IsMicrowaveOn) return;
-        
         if (readingSteinerEffect == null) return;
 
-        // Inicia a viagem se ainda não estiver a decorrer nenhuma
         if (shiftCoroutine == null)
         {
-            Debug.Log("Viagem no tempo iniciada via telemóvel (VR)!");
+            Debug.Log("Viagem no tempo iniciada!");
             shiftCoroutine = StartCoroutine(WorldlineShiftSequence());
         }
     }
-    // ---------------------------------
 
     private IEnumerator WorldlineShiftSequence()
     {
-        // 1. Build-up (Distorção a aumentar)
+        // 1. Build-up
         float elapsed = 0f;
         while (elapsed < rampDuration)
         {
@@ -115,7 +109,7 @@ public class MicrowaveReadingSteinerDriver : MonoBehaviour
         if (readingSteinerEffect != null) readingSteinerEffect.currentIntensity = 0f; 
 
         // 4. Choque Psicológico na sala dos clones
-        yield return new WaitForSeconds(5.0f);
+        yield return new WaitForSeconds(15.0f);
 
         // 5. Regresso Violento
         if (readingSteinerEffect != null) readingSteinerEffect.currentIntensity = maxIntensity;
@@ -129,25 +123,28 @@ public class MicrowaveReadingSteinerDriver : MonoBehaviour
         foreach (var obj in objectsOff) if (obj != null) obj.SetActive(false);
         foreach (var obj in objectsOn) if (obj != null) obj.SetActive(true);
 
-        // --- TRANSFORMAR EM HOLOGRAMA (AUTOMÁTICO NOS FILHOS) ---
+        // --- INJETAR SCRIPT DE HOLOGRAMA DINAMICAMENTE ---
         if (materialHolograma != null && paisParaHolograma != null)
         {
             foreach (Transform pai in paisParaHolograma)
             {
                 if (pai != null)
                 {
-                    // Apanha o Pai e os Filhos todos
-                    Renderer[] todosOsRenderers = pai.GetComponentsInChildren<Renderer>(true);
+                    // 1. Tenta ver se o objeto já tem o script (caso o tenhas posto à mão no Unity)
+                    HologramController hc = pai.GetComponent<HologramController>();
                     
-                    foreach (Renderer rend in todosOsRenderers)
+                    // 2. Se não tiver o script, cria-o e cola-o no objeto em pleno jogo!
+                    if (hc == null)
                     {
-                        Material[] novosMateriais = new Material[rend.materials.Length];
-                        for (int i = 0; i < novosMateriais.Length; i++)
-                        {
-                            novosMateriais[i] = materialHolograma;
-                        }
-                        rend.materials = novosMateriais;
+                        hc = pai.gameObject.AddComponent<HologramController>();
                     }
+
+                    // 3. Passa-lhe a referência do material azul
+                    hc.materialHologramaBase = materialHolograma;
+                    
+                    // 4. Ativa o script. Isto faz disparar o Start() do HologramController,
+                    // que vai varrer os filhos todos, mudar as cores e ativar o glitch de proximidade.
+                    hc.enabled = true;
                 }
             }
         }
