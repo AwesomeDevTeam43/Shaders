@@ -1,10 +1,14 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.XR.Interaction.Toolkit.Interactables; // Necessário para as versões mais recentes do XR Toolkit
 
+[RequireComponent(typeof(XRGrabInteractable))]
 public class MicrowaveReadingSteinerDriver : MonoBehaviour
 {
-    [Header("References")]
-    [Tooltip("Arrasta a câmara que tem o script ReadingSteinerEffect")]
+    [Header("VR References")]
+    [SerializeField] private XRGrabInteractable grabInteractable;
+    [SerializeField] private BlackHoleActivationButton microwaveSwitch;
     [SerializeField] private ReadingSteinerEffect readingSteinerEffect;
 
     [Header("Effect Settings")]
@@ -30,17 +34,61 @@ public class MicrowaveReadingSteinerDriver : MonoBehaviour
     [SerializeField] private Transform[] paisParaHolograma;
 
     private Coroutine shiftCoroutine;
+    private bool isHeld;
 
-    // Função pública para poderes chamar do teu script de VR ou de um botão
-    public void ActivateWorldlineShift()
+    // --- LÓGICA DE VR RESTAURADA ---
+    private void Awake()
     {
-        // Evita que o jogador ative a viagem duas vezes ao mesmo tempo
+        if (grabInteractable == null)
+            grabInteractable = GetComponent<XRGrabInteractable>();
+
+        if (readingSteinerEffect == null)
+            readingSteinerEffect = FindFirstObjectByType<ReadingSteinerEffect>();
+    }
+
+    private void OnEnable()
+    {
+        if (grabInteractable == null) return;
+        grabInteractable.selectEntered.AddListener(OnGrabbed);
+        grabInteractable.selectExited.AddListener(OnReleased);
+        grabInteractable.activated.AddListener(OnActivated);
+    }
+
+    private void OnDisable()
+    {
+        if (grabInteractable == null) return;
+        grabInteractable.selectEntered.RemoveListener(OnGrabbed);
+        grabInteractable.selectExited.RemoveListener(OnReleased);
+        grabInteractable.activated.RemoveListener(OnActivated);
+    }
+
+    private void OnGrabbed(SelectEnterEventArgs args)
+    {
+        isHeld = true;
+    }
+
+    private void OnReleased(SelectExitEventArgs args)
+    {
+        isHeld = false;
+    }
+
+    private void OnActivated(ActivateEventArgs args)
+    {
+        if (!isHeld) return;
+        
+        // Se o teu microondas precisar de estar ligado primeiro, esta linha garante isso
+        if (microwaveSwitch == null || !microwaveSwitch.IsMicrowaveOn) return;
+        
+        if (readingSteinerEffect == null) return;
+
+        // Inicia a viagem se ainda não estiver a decorrer nenhuma
         if (shiftCoroutine == null)
         {
-            Debug.Log("Viagem no tempo iniciada!");
+            Debug.Log("Viagem no tempo iniciada via telemóvel (VR)!");
             shiftCoroutine = StartCoroutine(WorldlineShiftSequence());
         }
     }
+    // ---------------------------------
 
     private IEnumerator WorldlineShiftSequence()
     {
@@ -84,17 +132,15 @@ public class MicrowaveReadingSteinerDriver : MonoBehaviour
         // --- TRANSFORMAR EM HOLOGRAMA (AUTOMÁTICO NOS FILHOS) ---
         if (materialHolograma != null && paisParaHolograma != null)
         {
-            // Percorre cada objeto Pai que arrastaste no Inspetor
             foreach (Transform pai in paisParaHolograma)
             {
                 if (pai != null)
                 {
-                    // Procura automaticamente todos os componentes de desenho no Pai e nos Filhos
+                    // Apanha o Pai e os Filhos todos
                     Renderer[] todosOsRenderers = pai.GetComponentsInChildren<Renderer>(true);
                     
                     foreach (Renderer rend in todosOsRenderers)
                     {
-                        // Muda todos os materiais de cada parte
                         Material[] novosMateriais = new Material[rend.materials.Length];
                         for (int i = 0; i < novosMateriais.Length; i++)
                         {
@@ -114,7 +160,6 @@ public class MicrowaveReadingSteinerDriver : MonoBehaviour
 
     private void TeleportPlayer(Transform targetTP)
     {
-        // Desligamos o CharacterController brevemente para o Unity não bloquear o Teleporte do Jogador
         CharacterController cc = player.GetComponent<CharacterController>();
         if (cc != null) cc.enabled = false; 
 

@@ -15036,6 +15036,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 790df68c77e38b645a9a5f58977d9c0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MicrowaveReadingSteinerDriver
+  grabInteractable: {fileID: 2035918530}
+  microwaveSwitch: {fileID: 133301568}
   readingSteinerEffect: {fileID: 1784042}
   rampDuration: 2.5
   maxIntensity: 1.2
