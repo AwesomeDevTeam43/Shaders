@@ -24,7 +24,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs: []
     m_Ints:
-    - _MaxSteps: 1024
+    - _MaxSteps: 32720
     m_Floats:
     - _DiskDensity: 41.8
     - _DiskRadius: 1
@@ -33,7 +33,7 @@ Material:
     - _Mass: 0.08
     - _Spin: 3
     - _SpinSpeed: 5.94
-    - _StepSize: 0.01
+    - _StepSize: 0.005
     - _WarpStrength: 1
     m_Colors:
     - _DiskColor: {r: 7.668084, g: 2.9073582, b: 0.542553, a: 1}
