@@ -354,6 +354,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kurisu Makise
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0c5449784082537469e2061fa6032038, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 3062356789946986644, guid: 0c5449784082537469e2061fa6032038, type: 3}
@@ -13679,7 +13683,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1709580524
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13694,6 +13698,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnergyShieldController
   shieldRenderer: {fileID: 1709580526}
   impactDuration: 0.6
+  repulsionForce: 15
+  upwardBias: 0.2
+  forceMode: 1
 --- !u!135 &1709580525
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -15304,6 +15311,8 @@ MonoBehaviour:
   objectsOn:
   - {fileID: 1031259966}
   - {fileID: 2075489968}
+  - {fileID: 1709580523}
+  - {fileID: 2145464451}
   materialHolograma: {fileID: 2100000, guid: 5f1b747aa1b681143bfb5e862bf30856, type: 2}
   paisParaHolograma:
   - {fileID: 1289638472}
@@ -15893,6 +15902,11 @@ MonoBehaviour:
   glitchStartDistance: 5
   glitchMaxDistance: 1.5
   constantGlitchDistance: 0.5
+--- !u!1 &2145464451 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 0c5449784082537469e2061fa6032038, type: 3}
+  m_PrefabInstance: {fileID: 27460907}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
