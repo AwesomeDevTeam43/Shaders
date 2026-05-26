@@ -10,9 +10,9 @@ Projeto Unity desenvolvido para a cadeira de TAP3D. Todos os efeitos visuais for
 2. [Energy Shield](#2-energy-shield)
 3. [Hologram](#3-hologram)
 4. [Radioactive Liquid](#4-radioactive-liquid)
-5. [Stencil Portal + X-Ray](#6-stencil-portal--x-ray)
-6. [Kerr — Black Hole Volumétrico](#7-kerr--black-hole-volumétrico)
-7. [Reading Steiner](#8-reading-steiner)
+5. [Stencil Portal + X-Ray](#5-stencil-portal--x-ray)
+6. [Kerr — Black Hole Volumétrico](#6-kerr--black-hole-volumétrico)
+7. [Reading Steiner](#7-reading-steiner)
 
 ---
 
@@ -380,7 +380,7 @@ fixed4 emissive = _GlowColor * glowPulse * _EmissionIntensity * foam;
 
 ---
 
-## 7. Stencil Portal + X-Ray
+## 5. Stencil Portal + X-Ray
 
 **Ficheiros:**
 - `Assets/Shaders/StencilPortal.shader`
@@ -438,7 +438,7 @@ Fresnel ilumina as bordas do objeto. Uma onda sinusoidal animada no eixo Y local
 
 ---
 
-## 8. Kerr — Black Hole Volumétrico
+## 6. Kerr — Black Hole Volumétrico
 
 **Ficheiros:**
 - `Assets/Shaders/ElPsyKongroo/Kerr.shader`
@@ -567,7 +567,7 @@ public class BlackHoleActivationButton : MonoBehaviour
 
 ---
 
-## 8. Reading Steiner
+## 7. Reading Steiner
 
 **Ficheiros:**
 - `Assets/Shaders/ElPsyKongroo/ReadingSteiner.shader`
