@@ -86,7 +86,6 @@ public class MicrowaveReadingSteinerDriver : MonoBehaviour
 
     private IEnumerator WorldlineShiftSequence()
     {
-        // 1. Build-up
         float elapsed = 0f;
         while (elapsed < rampDuration)
         {
@@ -98,28 +97,22 @@ public class MicrowaveReadingSteinerDriver : MonoBehaviour
             yield return null;
         }
 
-        // 2. Clímax
         if (readingSteinerEffect != null) readingSteinerEffect.currentIntensity = maxIntensity;
         yield return new WaitForSeconds(0.4f);
 
-        // 3. Teleporte para Sala dos Clones
         if (player != null && cloneRoomTP != null) TeleportPlayer(cloneRoomTP);
         if (cctvEffect != null) cctvEffect.enabled = true;
         
         if (readingSteinerEffect != null) readingSteinerEffect.currentIntensity = 0f; 
 
-        // 4. Choque Psicológico na sala dos clones
         yield return new WaitForSeconds(15.0f);
 
-        // 5. Regresso Violento
         if (readingSteinerEffect != null) readingSteinerEffect.currentIntensity = maxIntensity;
         yield return new WaitForSeconds(0.2f);
 
-        // 6. Estabelecer nova Worldline (Regresso)
         if (player != null && startRoomTP != null) TeleportPlayer(startRoomTP);
         if (cctvEffect != null) cctvEffect.enabled = false;
 
-        // --- ATIVAR / DESATIVAR OBJETOS E PORTAIS ---
         foreach (var obj in objectsOff) if (obj != null) obj.SetActive(false);
         foreach (var obj in objectsOn) if (obj != null) obj.SetActive(true);
 
@@ -130,26 +123,20 @@ public class MicrowaveReadingSteinerDriver : MonoBehaviour
             {
                 if (pai != null)
                 {
-                    // 1. Tenta ver se o objeto já tem o script (caso o tenhas posto à mão no Unity)
                     HologramController hc = pai.GetComponent<HologramController>();
                     
-                    // 2. Se não tiver o script, cria-o e cola-o no objeto em pleno jogo!
                     if (hc == null)
                     {
                         hc = pai.gameObject.AddComponent<HologramController>();
                     }
 
-                    // 3. Passa-lhe a referência do material azul
                     hc.materialHologramaBase = materialHolograma;
-                    
-                    // 4. Ativa o script. Isto faz disparar o Start() do HologramController,
-                    // que vai varrer os filhos todos, mudar as cores e ativar o glitch de proximidade.
+
                     hc.enabled = true;
                 }
             }
         }
 
-        // Fim da sequência
         if (readingSteinerEffect != null) readingSteinerEffect.currentIntensity = 0f;
         shiftCoroutine = null;
         Debug.Log("Viagem concluída com sucesso!");

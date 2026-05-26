@@ -62,14 +62,11 @@ Shader "Custom/Hologram"
             {
                 v2f o;
 
-                // 1. Breathing
                 float breath = (sin(_Time.y * _BreathSpeed) + cos(_Time.y * _BreathSpeed * 0.8)) * 0.5;
                 v.vertex.xyz += v.normal * breath * _BreathAmp;
 
-                // 2. Glitch Vertex Offset
                 float slice = sin(_Time.y * 50.0 + v.vertex.y * 20.0);
                 
-                // NEW: Use max() to force glitchSnap to 1 if we are in constant glitch mode
                 float baseSnap = step(0.8, sin(_Time.y * 15.0)); 
                 float glitchSnap = max(baseSnap, _IsConstantGlitch);
                 
@@ -87,19 +84,15 @@ Shader "Custom/Hologram"
                 float3 viewDir = normalize(UnityWorldSpaceViewDir(i.worldPos));
                 float3 normal = normalize(i.normal);
 
-                // 1. Rim
                 float rim = 1.0 - saturate(dot(normal, viewDir));
                 float rimIntensity = pow(rim, _RimPower);
 
-                // 2. Scanlines
                 float scanline = sin(i.worldPos.y * _ScanlineFreq - _Time.y * _ScanlineSpeed);
                 scanline = scanline * 0.5 + 0.5; 
 
                 fixed4 col = _Color;
                 col.a = _Color.a * rimIntensity * lerp(1.0, scanline, _ScanlineIntensity);
 
-                // 3. Glitch Alpha Flicker
-                // NEW: Mirror the max() logic here so the alpha flickers wildly without pauses
                 float baseSnap = step(0.8, sin(_Time.y * 15.0)); 
                 float glitchSnap = max(baseSnap, _IsConstantGlitch);
                 float flicker = lerp(1.0, sin(_Time.y * 40.0) * 0.5 + 0.5, _GlitchIntensity * glitchSnap);

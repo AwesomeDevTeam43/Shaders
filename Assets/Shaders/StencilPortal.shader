@@ -7,12 +7,11 @@ Shader "Custom/Stencil/PortalMask_Hologram"
     }
     SubShader
     {
-        // Mudámos para Transparent-1 para suportar cores transparentes antes do objeto escondido
         Tags { "RenderType"="Transparent" "Queue"="Geometry+1" }
         
-        Blend SrcAlpha OneMinusSrcAlpha // Permite transparência real
+        Blend SrcAlpha OneMinusSrcAlpha
         ZWrite Off 
-        Cull Off // Vês o ecrã de ambos os lados
+        Cull Off
 
         Stencil
         {
@@ -53,16 +52,12 @@ Shader "Custom/Stencil/PortalMask_Hologram"
 
             fixed4 frag (v2f i) : SV_Target
             {
-                // Calcula a distância do centro (0.5, 0.5) até às bordas (0 ou 1)
                 float2 dist = abs(i.uv - 0.5) * 2.0; 
                 
-                // Escolhe a borda mais próxima (X ou Y)
                 float edge = max(dist.x, dist.y);
                 
-                // Puxa a cor apenas para os extremos usando uma potência
                 float glow = pow(edge, _Thickness);
                 
-                // A cor final terá Alpha 0 no centro (buraco do stencil) e Alpha 1 nas bordas
                 fixed4 finalColor = _BorderColor;
                 finalColor.a = glow;
                 

@@ -7,7 +7,7 @@ Shader "Custom/WarpStarfield"
         _Density ("Star Density", Range(1.0, 10.0)) = 5.0
         _Layers ("Depth Layers", Integer) = 5
         _Stretch ("Speed Streak Stretch", Range(1.0, 20.0)) = 8.0
-        _StarSize ("Star Core Size", Range(0.001, 0.1)) = 0.015 // NEW: Controls the solid center
+        _StarSize ("Star Core Size", Range(0.001, 0.1)) = 0.015
     }
     SubShader
     {
@@ -40,7 +40,6 @@ Shader "Custom/WarpStarfield"
             float _Stretch;
             float _StarSize;
 
-            // NEW: A true 3D hash function. Returns a random Vector3 instead of just a single float.
             float3 hash33(float3 p3)
             {
                 p3 = frac(p3 * float3(0.1031, 0.1030, 0.0973));
@@ -71,28 +70,18 @@ Shader "Custom/WarpStarfield"
                     float3 gridId = floor(scaledPos);
                     float3 localPos = frac(scaledPos) - 0.5;
 
-                    // Generate 3 random numbers (x, y, z) for this specific cell
                     float3 random3D = hash33(gridId);
 
-                    // 1. BREAK THE GRID: Randomly shift the star off-center.
-                    // We multiply by 0.5 so it never accidentally shifts into the neighbor's cell.
                     localPos -= (random3D - 0.5) * 0.5;
 
-                    // Use the 'X' random value to decide if a star spawns here
                     if (random3D.x > 0.85) 
                     {
                         float dist = length(localPos);
-
-                        // 2. PERFECT SPHERES: Force the light to 0 before the 0.5 cell boundary.
-                        // smoothstep(max, min, value) creates a perfect, anti-aliased circle.
                         float core = smoothstep(_StarSize + 0.01, _StarSize, dist);
-                        
-                        // Add a soft halo that strictly cuts off at a radius of 0.25 (well inside the 0.5 cell wall)
                         float halo = smoothstep(0.25, 0.0, dist) * 0.3; 
                         
                         float brightness = core + halo;
 
-                        // Use the 'Y' random value to offset the pulsing animation
                         float fade = sin(_Time.y * 2.0 + random3D.y * 10.0) * 0.5 + 0.5;
                         
                         accumulatedColor += _StarColor.rgb * brightness * fade;

@@ -36,7 +36,6 @@ public class CCTVGlitchEffect : MonoBehaviour
 
     void Update()
     {
-        // C# controla o ritmo orgânico das interferências
         glitchTimer -= Time.deltaTime;
         if (glitchTimer <= 0f)
         {

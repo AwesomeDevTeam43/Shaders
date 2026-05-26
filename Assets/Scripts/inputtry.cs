@@ -4,23 +4,19 @@ using UnityEngine.InputSystem;
 public class AnomalyTrigger : MonoBehaviour
 {
     [Header("The Button to Press")]
-    public InputActionProperty triggerButton; // E.g., The 'A' button on your right controller
-
+    public InputActionProperty triggerButton;
     [Header("The Target")]
-    public KerrAnomaly anomalyScript; // The script on your black hole sphere
+    public KerrAnomaly anomalyScript;
 
     private void OnEnable()
     {
-        // Listen for the exact moment the button is pressed down
         triggerButton.action.Enable(); 
         
-        // Listen for the press
         triggerButton.action.performed += OnTriggerPressed;
     }
 
     private void OnDisable()
     {
-        // Always clean up the listener to prevent memory leaks
         triggerButton.action.performed -= OnTriggerPressed;
     }
 
@@ -31,7 +27,6 @@ public class AnomalyTrigger : MonoBehaviour
             Debug.Log("EL PSY KONGROO: Anomaly Activated!");
             anomalyScript.ActivateAnomaly();
             
-            // Optional: Disable the button so you can't accidentally trigger the coroutine twice
             triggerButton.action.Disable(); 
         }
     }

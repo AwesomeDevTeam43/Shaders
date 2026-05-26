@@ -4,7 +4,7 @@ Shader "Custom/TrueVolumetricBlackHole"
     {
         _Mass ("Black Hole Mass", Range(0.01, 2.0)) = 0.3
         _EventHorizon ("Event Horizon", Range(0.01, 0.5)) = 0.15
-        _WarpStrength ("Lensing Exaggeration", Range(1, 10)) = 5.0 // NEW: Multiplies the background tear
+        _WarpStrength ("Lensing Exaggeration", Range(1, 10)) = 5.0
         
         [Header(Accretion Disk)]
         _DiskRadius ("Disk Outer Radius", Range(0.2, 2.0)) = 1.0
@@ -94,34 +94,27 @@ Shader "Custom/TrueVolumetricBlackHole"
                     
                     if (distFromCenter > 0.51) break; 
 
-                    // GRAVITY SINK
                     float3 gravityPull = -normalize(rayPos) * (_Mass / (distFromCenter * distFromCenter + 0.001));
                     rayDir = normalize(rayDir + gravityPull * _StepSize);
                     
-                    // ACCRETION DISK (NOW WITH ANGULAR SPIN)
                     float distToEquator = abs(rayPos.y);
                     if (distToEquator < _DiskThickness && distFromCenter > _EventHorizon && distFromCenter < _DiskRadius)
                     {
                         float verticalDensity = 1.0 - (distToEquator / _DiskThickness);
                         float radialFalloff = 1.0 - ((distFromCenter - _EventHorizon) / (_DiskRadius - _EventHorizon));
                         
-                        // NEW: Calculate actual 360-degree angle for true rotation
                         float angle = atan2(rayPos.z, rayPos.x);
                         float spin = angle + _Time.y * _SpinSpeed;
                         
-                        // Break the gas into chaotic, spinning clumps
                         float radialNoise = sin(distFromCenter * 40.0) * 0.5 + 0.5;
                         float angularNoise = sin(spin * 6.0) * 0.5 + 0.5;
                         float ringNoise = radialNoise * angularNoise;
                         
-                        // NEW: Exaggerated Doppler Beaming (Relativistic beaming)
                         float3 spinDir = normalize(cross(float3(0, 1, 0), rayPos));
-                        // Gas moving toward you is blinding, gas moving away is dark
                         float doppler = pow(max(0.0, dot(rayDir, spinDir)), 2.0); 
                         
                         float stepGlow = verticalDensity * radialFalloff * ringNoise * _DiskDensity * _StepSize;
                         
-                        // Boost the intensity heavily on the approaching side
                         accumulatedGlow.rgb += _DiskColor.rgb * stepGlow * (doppler * 3.0 + 0.2);
                         accumulatedGlow.a += stepGlow;
                     }
@@ -135,7 +128,6 @@ Shader "Custom/TrueVolumetricBlackHole"
                 }
                 else
                 {
-                    // MULTIPLY THE ESCAPE DISTORTION
                     float2 distortion = (rayDir.xy - initialRayDir.xy) * _WarpStrength;
                     float2 lensedUV = originalScreenUV + distortion;
                     
