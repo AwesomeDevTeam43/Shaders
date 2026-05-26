@@ -16,7 +16,7 @@ Shader "Custom/Hologram"
         
         [Header(Glitch Control)]
         _GlitchIntensity ("Glitch Intensity", Range(0, 1)) = 0.0
-        _IsConstantGlitch ("Is Constant Glitch", Float) = 0.0 // 0 = Beat, 1 = Constant
+        _IsConstantGlitch ("Is Constant Glitch", Float) = 0.0
     }
     
     SubShader
