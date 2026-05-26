@@ -5,7 +5,6 @@ Shader "Custom/EnergyShield"
         _Color("Shield Color", Color) = (0.2, 0.8, 1.0, 0.3)
         _RippleColor("Ripple Color", Color) = (1.0, 0.5, 0.1, 1.0)
         _FresnelEffect("Rim Power", Range(0.5, 6)) = 2.5
-        _PulseSpeed("Pulse Speed", Float) = 3.0
         _ImpactPos("Impact World Pos", Vector) = (0, 0, 0, 0)
         _ImpactTime("Impact Timer (0-1)", Range(0, 1)) = 0.0
         _MaxRadius("Max Ripple Radius", Float) = 3.0
@@ -31,7 +30,6 @@ Shader "Custom/EnergyShield"
             float4 _Color;
             float4 _RippleColor;
             float _FresnelEffect;
-            float _PulseSpeed;
             float4 _ImpactPos;
             float _ImpactTime;
             float _MaxRadius;
@@ -105,7 +103,6 @@ Shader "Custom/EnergyShield"
                 float3 V = normalize(i.viewDir);
 
                 float fresnel = pow(1.0 - saturate(dot(N, V)), _FresnelEffect);
-                float pulse = sin(_Time.y * _PulseSpeed) * 0.5 + 0.5;
                 float dist = length(i.worldPos - _ImpactPos.xyz);
                 float currentRadius = _ImpactTime * _MaxRadius;
                 float ripple = 1.0 - smoothstep(0.0, _RippleWidth, abs(dist - currentRadius));
@@ -114,7 +111,6 @@ Shader "Custom/EnergyShield"
                 fixed4 col;
                 col.rgb = _Color.rgb;
                 col.rgb += fresnel * _Color.rgb;
-                col.rgb += pulse * _Color.rgb * 0.1;
                 col.rgb = lerp(col.rgb, _RippleColor.rgb, rippleFade);
                 col.a = _Color.a + fresnel * 0.3 + rippleFade * 0.5;
 
