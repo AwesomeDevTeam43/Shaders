@@ -10,10 +10,9 @@ Projeto Unity desenvolvido para a cadeira de TAP3D. Todos os efeitos visuais for
 2. [Energy Shield](#2-energy-shield)
 3. [Hologram](#3-hologram)
 4. [Radioactive Liquid](#4-radioactive-liquid)
-5. [Starfield (Warp)](#5-starfield-warp)
-6. [Stencil Portal + X-Ray](#6-stencil-portal--x-ray)
-7. [Kerr — Black Hole Volumétrico](#7-kerr--black-hole-volumétrico)
-8. [Reading Steiner](#8-reading-steiner)
+5. [Stencil Portal + X-Ray](#5-stencil-portal--x-ray)
+6. [Kerr — Black Hole Volumétrico](#6-kerr--black-hole-volumétrico)
+7. [Reading Steiner](#7-reading-steiner)
 
 ---
 
@@ -381,64 +380,7 @@ fixed4 emissive = _GlowColor * glowPulse * _EmissionIntensity * foam;
 
 ---
 
-## 5. Starfield (Warp)
-
-**Ficheiro:**
-- `Assets/Shaders/Starfield.shader`
-
-### O que faz
-
-Fundo de viagem a velocidade warp. Gera estrelas proceduralmente em múltiplas camadas de profundidade, cada uma com velocidade diferente (parallax), criando uma sensação de túnel de velocidade.
-
-### Shader — Partes Importantes
-
-```hlsl
-Cull Front  // renderiza faces internas de uma esfera/caixa
-ZWrite Off
-```
-Aplicado ao interior de uma esfera — o jogador fica dentro do campo de estrelas.
-
-**Hash 3D para posição aleatória das estrelas:**
-```hlsl
-float3 hash33(float3 p3)
-{
-    p3 = frac(p3 * float3(0.1031, 0.1030, 0.0973));
-    p3 += dot(p3, p3.yxz + 33.33);
-    return frac((p3.xxy + p3.yxx) * p3.zyx);
-}
-```
-Função hash sem textura — transforma coordenadas de grelha 3D em valores pseudo-aleatórios 3D.
-
-**Raycasting com múltiplas camadas:**
-```hlsl
-float3 rayDir = normalize(i.worldPos - _WorldSpaceCameraPos);
-rayDir.z /= _Stretch; // achata o eixo Z = streaks de velocidade
-
-for (int layer = 1; layer <= _Layers; layer++)
-{
-    float3 scaledPos = rayDir * (layer * _Density);
-    scaledPos.z += _Time.y * _Speed / layer; // camadas mais próximas movem mais rápido
-```
-O raio de visão é dividido em grelhas 3D. Cada camada tem densidade e velocidade diferentes (`/ layer`) — camadas mais próximas (maior `layer`) movem-se mais rápido, simulando parallax.
-
-**Renderização de cada estrela:**
-```hlsl
-if (random3D.x > 0.85) // só 15% das células têm estrela
-{
-    float dist = length(localPos);
-    float core = smoothstep(_StarSize + 0.01, _StarSize, dist);  // núcleo sólido
-    float halo = smoothstep(0.25, 0.0, dist) * 0.3;              // halo difuso
-
-    float fade = sin(_Time.y * 2.0 + random3D.y * 10.0) * 0.5 + 0.5; // cintilação
-
-    accumulatedColor += _StarColor.rgb * (core + halo) * fade;
-}
-```
-`smoothstep` cria bordas suaves no núcleo e halo. O `_Stretch` no eixo Z estica as estrelas em comprimento — parecem riscos de velocidade.
-
----
-
-## 6. Stencil Portal + X-Ray
+## 5. Stencil Portal + X-Ray
 
 **Ficheiros:**
 - `Assets/Shaders/StencilPortal.shader`
@@ -496,7 +438,7 @@ Fresnel ilumina as bordas do objeto. Uma onda sinusoidal animada no eixo Y local
 
 ---
 
-## 7. Kerr — Black Hole Volumétrico
+## 6. Kerr — Black Hole Volumétrico
 
 **Ficheiros:**
 - `Assets/Shaders/ElPsyKongroo/Kerr.shader`
@@ -625,7 +567,7 @@ public class BlackHoleActivationButton : MonoBehaviour
 
 ---
 
-## 8. Reading Steiner
+## 7. Reading Steiner
 
 **Ficheiros:**
 - `Assets/Shaders/ElPsyKongroo/ReadingSteiner.shader`
@@ -754,7 +696,6 @@ Este script usa **todos os outros sistemas** em sequência: Reading Steiner → 
 | Energy Shield | Geometry shader, Fresnel, ripple | `EnergyShieldController.cs` |
 | Hologram | Rim light, scan lines, glitch geométrico | `HologramController.cs` |
 | Radioactive Liquid | Multi-pass, Stencil, Value Noise, clip() | — |
-| Starfield | Raymarching por camadas, hash procedural | — |
 | Stencil Portal | Stencil write/read, ZTest Always | — |
 | Kerr Black Hole | Raymarching volumétrico, GrabPass, doppler | `KerrAnomaly` + `BlackHoleActivationButton.cs` |
 | Reading Steiner | Post-process, tearing, inversão de cor | `ReadingSteinerEffect.cs` + `MicrowaveReadingSteinerDriver.cs` |
