@@ -33,6 +33,6 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Emission: {r: 0, g: 1, b: 0.91298866, a: 1}
-    - _ScanColor: {r: 0.23018861, g: 0.23018861, b: 0.23018861, a: 0.8}
+    - _ScanColor: {r: 0, g: 0, b: 0, a: 0.8}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

@@ -24,16 +24,16 @@ Material:
     serializedVersion: 3
     m_TexEnvs: []
     m_Ints:
-    - _MaxSteps: 1024
+    - _MaxSteps: 8192
     m_Floats:
     - _DiskDensity: 41.8
-    - _DiskRadius: 1
-    - _DiskThickness: 0.0368
-    - _EventHorizon: 0.064
-    - _Mass: 0.08
+    - _DiskRadius: 1.27
+    - _DiskThickness: 0.083
+    - _EventHorizon: 0.103
+    - _Mass: 0.14
     - _Spin: 3
-    - _SpinSpeed: 5.94
-    - _StepSize: 0.01
+    - _SpinSpeed: 12.6
+    - _StepSize: 0.005
     - _WarpStrength: 1
     m_Colors:
     - _DiskColor: {r: 7.668084, g: 2.9073582, b: 0.542553, a: 1}
