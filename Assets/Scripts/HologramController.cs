@@ -9,13 +9,13 @@ public class HologramController : MonoBehaviour
 
     [Header("Glitch Proximity Settings")]
     [Tooltip("Distância a que o efeito de glitch começa.")]
-    public float glitchStartDistance = 5f;
+    public float glitchStartDistance = 2f;
     
     [Tooltip("Distância a que o glitch atinge a intensidade máxima.")]
     public float glitchMaxDistance = 1.5f;
 
     [Tooltip("Distância a que o glitch fica constante (sem pausas).")]
-    public float constantGlitchDistance = 0.5f;
+    public float constantGlitchDistance = 1.0f;
 
     private Transform playerTransform;
     private List<Material> materiaisInstanciados = new List<Material>();

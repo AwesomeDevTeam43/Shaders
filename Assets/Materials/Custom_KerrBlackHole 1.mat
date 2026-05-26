@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Mat_Portal
-  m_Shader: {fileID: 4800000, guid: b9ce33b74496ecf4f984c820d1b44132, type: 3}
+  m_Name: Custom_KerrBlackHole 1
+  m_Shader: {fileID: 4800000, guid: bc8ddbe3e30abe84ea9900f82d6b3c0c, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -23,10 +23,19 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs: []
-    m_Ints: []
+    m_Ints:
+    - _MaxSteps: 1024
     m_Floats:
-    - _Thickness: 10
+    - _DiskDensity: 41.8
+    - _DiskRadius: 1
+    - _DiskThickness: 0.0368
+    - _EventHorizon: 0.064
+    - _Mass: 0.08
+    - _Spin: 3
+    - _SpinSpeed: 5.94
+    - _StepSize: 0.01
+    - _WarpStrength: 1
     m_Colors:
-    - _BorderColor: {r: 0.4415095, g: 0.4415095, b: 0.4415095, a: 1}
+    - _DiskColor: {r: 7.668084, g: 2.9073582, b: 0.542553, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
