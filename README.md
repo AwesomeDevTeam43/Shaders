@@ -696,7 +696,6 @@ Este script usa **todos os outros sistemas** em sequência: Reading Steiner → 
 | Energy Shield | Geometry shader, Fresnel, ripple | `EnergyShieldController.cs` |
 | Hologram | Rim light, scan lines, glitch geométrico | `HologramController.cs` |
 | Radioactive Liquid | Multi-pass, Stencil, Value Noise, clip() | — |
-| Starfield | Raymarching por camadas, hash procedural | — |
 | Stencil Portal | Stencil write/read, ZTest Always | — |
 | Kerr Black Hole | Raymarching volumétrico, GrabPass, doppler | `KerrAnomaly` + `BlackHoleActivationButton.cs` |
 | Reading Steiner | Post-process, tearing, inversão de cor | `ReadingSteinerEffect.cs` + `MicrowaveReadingSteinerDriver.cs` |
