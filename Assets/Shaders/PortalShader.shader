@@ -1,54 +1,50 @@
-Shader "Custom/Stencil/DimensionalPortal"
+Shader "Custom/Stencil/FrankStonePortal"
 {
     Properties
     {
-        // --- Borda ---
-        _BorderColor        ("Border Color",            Color)        = (0.0, 1.0, 0.2, 1.0)
-        _BorderThickness    ("Border Thickness",        Range(1, 12)) = 4.0
-        _RimPower           ("Rim Power",               Range(0.5, 6))= 2.0
+        [Header(1. Fundo e Centro)]
+        [HDR] _CoreColor    ("Cor do Nucleo", Color) = (0.8, 1.0, 0.8, 1.0)
+        _DarkColor          ("Cor do Vazio (Fundo)", Color) = (0.0, 0.02, 0.01, 1.0)
+        _CoreSize           ("Tamanho do Brilho Central", Range(0.0, 0.5)) = 0.05
 
-        // --- Vórtice ---
-        _VortexColor        ("Vortex Color",            Color)        = (0.1, 0.9, 0.15, 1.0)
-        _VortexSpeed        ("Vortex Spin Speed",       Range(0, 5))  = 1.2
-        _VortexTex          ("Vortex Texture",          2D)           = "white" {}
+        [Header(2. Borda Fresnel Rim)]
+        [HDR] _RimColor     ("Cor do Fresnel", Color) = (0.0, 1.0, 0.2, 1.0)
+        _RimPower           ("Potencia do Fresnel", Range(0.1, 10.0)) = 3.0
 
-        // --- Linhas de vento ---
-        _WindColor          ("Wind Streak Color",       Color)        = (0.7, 1.0, 0.7, 1.0)
-        _WindSpeed          ("Wind Speed",              Range(0, 4))  = 1.5
-        _WindLineCount      ("Wind Line Count",         Range(8, 64)) = 28.0
-        _WindIntensity      ("Wind Intensity",          Range(0, 1))  = 0.35
+        [Header(3. Interior Vortice Espiral)]
+        [HDR] _VortexColor  ("Cor do Vortice", Color) = (0.0, 1.5, 0.2, 1.0)
+        _ArmCount           ("Numero de Bracos", Range(1, 15)) = 4.0
+        _SwirlSpeed         ("Torcao (Twist)", Range(0.0, 30.0)) = 12.0
+        _TimeSpeed          ("Velocidade da Espiral", Range(0.0, 15.0)) = 6.0
+        _EnergySharpness    ("Contraste da Energia", Range(1.0, 20.0)) = 8.0
 
-        // --- Glow geral ---
-        _GlowIntensity      ("Glow Intensity",          Range(0, 3))  = 1.4
-        _PulseSpeed         ("Pulse Speed",             Range(0, 6))  = 1.8
+        [Header(4. Linhas de Vento)]
+        [HDR] _WindColor    ("Cor das Linhas de Vento", Color) = (0.5, 1.0, 0.5, 1.0)
+        _WindSpeed          ("Velocidade de Succao", Range(0.0, 10.0)) = 3.0
+        _WindIntensity      ("Intensidade do Vento", Range(0.0, 2.0)) = 0.8
+        _WindLines          ("Quantidade de Linhas", Range(10, 100)) = 60.0
     }
 
     SubShader
     {
-        Tags { "RenderType"="Transparent" "Queue"="Geometry+1" }
-
+        Tags { "RenderType"="Transparent" "Queue"="Geometry+2" }
         Blend SrcAlpha OneMinusSrcAlpha
         ZWrite Off
-        Cull Off
+        ZTest Always
 
-        // ------------------------------------------------------------------
-        // Pass 1 — escreve máscara no stencil (igual ao StencilPortal.shader)
-        // ------------------------------------------------------------------
         Stencil
         {
             Ref 1
-            Comp Always
-            Pass Replace
+            Comp Always // (Muda para Equal quando fores usar a parede falsa!)
         }
 
         Pass
         {
             CGPROGRAM
-            #pragma vertex   vert
+            #pragma vertex vert
             #pragma fragment frag
             #include "UnityCG.cginc"
 
-            // ---- structs ----
             struct appdata
             {
                 float4 vertex : POSITION;
@@ -58,125 +54,109 @@ Shader "Custom/Stencil/DimensionalPortal"
 
             struct v2f
             {
-                float4 vertex   : SV_POSITION;
-                float2 uv       : TEXCOORD0;
-                float3 viewDir  : TEXCOORD1;
-                float3 normal   : TEXCOORD2;
+                float4 vertex       : SV_POSITION;
+                float2 uv           : TEXCOORD0;
+                float3 normalWorld  : TEXCOORD1;
+                float3 viewDirWorld : TEXCOORD2;
             };
 
-            // ---- propriedades ----
-            fixed4   _BorderColor;
-            float    _BorderThickness;
-            float    _RimPower;
+            float4 _CoreColor;
+            float4 _DarkColor;
+            float _CoreSize;
 
-            fixed4   _VortexColor;
-            float    _VortexSpeed;
-            sampler2D _VortexTex;
+            float4 _RimColor;
+            float _RimPower;
 
-            fixed4   _WindColor;
-            float    _WindSpeed;
-            float    _WindLineCount;
-            float    _WindIntensity;
+            float4 _VortexColor;
+            float _ArmCount;
+            float _SwirlSpeed;
+            float _TimeSpeed;
+            float _EnergySharpness;
 
-            float    _GlowIntensity;
-            float    _PulseSpeed;
+            float4 _WindColor;
+            float _WindSpeed;
+            float _WindIntensity;
+            float _WindLines;
 
-            // ---- helpers ----
-
-            // Pseudo-random clássico (mesmo estilo que CCTV_Glitch.shader)
-            float random(float2 st)
-            {
-                return frac(sin(dot(st, float2(12.9898, 78.233))) * 43758.5453123);
-            }
-
-            // Rotação UV em coordenadas polares (vórtice)
-            // spin acelera perto do centro — conservação de momento angular
-            float2 vortexUV(float2 uv, float speed)
-            {
-                float2 centered = uv - float2(0.5, 0.5);
-                float  radius   = length(centered);
-                float  angle    = atan2(centered.y, centered.x);
-
-                float  spin     = _Time.y * speed / (radius + 0.08);
-                angle          += spin;
-
-                return float2(cos(angle), sin(angle)) * radius + float2(0.5, 0.5);
-            }
-
-            // Streaks radiais animados para o centro
-            float windStreaks(float2 uv, float speed, float lineCount, float intensity)
-            {
-                float2 centered = uv - float2(0.5, 0.5);
-                float  radius   = length(centered);
-                float  angle    = atan2(centered.y, centered.x);
-
-                // linhas finas em ângulo, compridas no raio
-                float  lineNoise = frac(sin(angle * lineCount) * 43758.5453);
-                // animar em direção ao centro
-                float  travel    = frac(radius - _Time.y * speed);
-                float  streak    = lineNoise * (1.0 - travel) * (1.0 - radius * 1.8);
-
-                return saturate(streak * intensity);
-            }
-
-            // ---- vertex ----
-            v2f vert(appdata v)
+            v2f vert (appdata v)
             {
                 v2f o;
-                o.vertex  = UnityObjectToClipPos(v.vertex);
-                o.uv      = v.uv;
-                o.normal  = normalize(mul((float3x3)unity_ObjectToWorld, v.normal));
-                o.viewDir = normalize(WorldSpaceViewDir(v.vertex));
+                o.vertex = UnityObjectToClipPos(v.vertex);
+                o.uv = v.uv;
+                o.normalWorld = normalize(mul((float3x3)unity_ObjectToWorld, v.normal));
+                o.viewDirWorld = normalize(WorldSpaceViewDir(v.vertex));
                 return o;
             }
 
-            // ---- fragment ----
-            fixed4 frag(v2f i) : SV_Target
+            fixed4 frag (v2f i) : SV_Target
             {
-                // 1. Borda — Fresnel espalhado (igual à lógica do Hologram.shader)
-                float rimDot       = 1.0 - saturate(dot(i.normal, i.viewDir));
-                float rimIntensity = pow(rimDot, _RimPower);
+                float2 centered = i.uv - float2(0.5, 0.5);
+                float radius = length(centered);
+                float angle = atan2(centered.y, centered.x);
 
-                // glow de borda baseado em UV (mesmo cálculo do StencilPortal.shader)
-                float2 dist    = abs(i.uv - float2(0.5, 0.5)) * 2.0;
-                float  edge    = max(dist.x, dist.y);
-                float  edgeGlow = pow(edge, _BorderThickness);
+                // ==========================================
+                // 1. O VAZIO PROFUNDO
+                // ==========================================
+                float3 col = _DarkColor.rgb;
 
-                // combinar rim e edge
-                float  border  = saturate(rimIntensity + edgeGlow);
+                // ==========================================
+                // 2. VÓRTICE (Espirais de Energia)
+                // ==========================================
+                float arms = floor(_ArmCount);
+                
+                // O Segredo: A torção matemática
+                float spiralMath = angle * arms + radius * _SwirlSpeed - _Time.y * _TimeSpeed;
+                float spiral = sin(spiralMath) * 0.5 + 0.5;
+                
+                // Eleva a potência para fazer as linhas de energia ficarem afiadas (raios elétricos)
+                float energy = pow(spiral, _EnergySharpness);
+                
+                // Faz a energia desaparecer perto do centro (buraco negro) e nas bordas
+                energy *= smoothstep(0.5, 0.1, radius) * smoothstep(0.0, 0.1, radius);
 
-                // pulsação suave (mesmo estilo do EnergyShield.shader)
-                float  pulse   = sin(_Time.y * _PulseSpeed) * 0.5 + 0.5;
-                border        *= lerp(0.75, 1.0, pulse);
+                col = lerp(col, _VortexColor.rgb, energy);
 
-                // 2. Vórtice — UV polar animado, amostrado na textura (ou gerado)
-                float2 rotUV   = vortexUV(i.uv, _VortexSpeed);
-                // sem textura: gera padrão de espiral por noise
-                float  vortNoise = random(rotUV * 3.0 + _Time.y * 0.1);
-                // fade para o centro (mais intenso) e para as bordas (some)
-                float  radialFade = 1.0 - saturate(length(i.uv - float2(0.5, 0.5)) * 2.2);
-                float  vortex  = vortNoise * radialFade;
+                // ==========================================
+                // 3. LINHAS DE VENTO (Agora Dobradas!)
+                // ==========================================
+                float lines = floor(_WindLines);
+                
+                // O ERRO ESTAVA AQUI: Agora as linhas sofrem a torção da espiral!
+                float twistedAngle = angle + radius * (_SwirlSpeed * 0.8);
+                float normalizedAngle = frac((twistedAngle + 3.14159) / 6.28318);
+                
+                float slice = floor(normalizedAngle * lines);
+                float streakNoise = frac(sin(slice * 12.9898) * 43758.5);
+                
+                // Multiplicar o raio por 3.0 faz as linhas parecerem traços curtos em vez de riscos infinitos
+                float travel = frac(radius * 3.0 - _Time.y * _WindSpeed);
+                
+                float localAngle = frac(normalizedAngle * lines);
+                float lineThickness = smoothstep(0.1, 0.5, localAngle) * smoothstep(0.9, 0.5, localAngle);
+                
+                float streakMask = smoothstep(0.05, 0.2, radius) * smoothstep(0.5, 0.2, radius);
+                float streak = streakNoise * (1.0 - travel) * lineThickness * streakMask;
 
-                // 3. Linhas de vento
-                float  wind    = windStreaks(i.uv, _WindSpeed, _WindLineCount, _WindIntensity);
+                col += _WindColor.rgb * streak * _WindIntensity;
 
-                // 4. Composição final
-                fixed4 col = fixed4(0, 0, 0, 0);
+                // ==========================================
+                // 4. BRILHO CENTRAL (O Fim do Túnel)
+                // ==========================================
+                // Usar pow(..., 3.0) corta o "ovo gigante" e deixa só um ponto de luz focado
+                float coreGlow = pow(smoothstep(_CoreSize + 0.1, 0.0, radius), 3.0);
+                col = lerp(col, _CoreColor.rgb, coreGlow);
 
-                // borda
-                col.rgb += _BorderColor.rgb * border * _GlowIntensity;
-                col.a    = border * _BorderColor.a;
+                // ==========================================
+                // 5. CAMADA FRESNEL (Bordas da Porta)
+                // ==========================================
+                float3 normal = normalize(i.normalWorld);
+                float3 viewDir = normalize(i.viewDirWorld);
+                float rim = 1.0 - saturate(dot(normal, viewDir));
+                float rimIntensity = pow(rim, _RimPower);
 
-                // vórtice (só no interior — onde edge é baixo)
-                float interior = 1.0 - edgeGlow;
-                col.rgb += _VortexColor.rgb * vortex * interior * _GlowIntensity;
-                col.a    = saturate(col.a + vortex * interior * 0.7);
+                col += _RimColor.rgb * rimIntensity;
 
-                // linhas de vento (sobre o interior)
-                col.rgb += _WindColor.rgb * wind * interior;
-                col.a    = saturate(col.a + wind * interior * 0.5);
-
-                return col;
+                return fixed4(col, 1.0);
             }
             ENDCG
         }
