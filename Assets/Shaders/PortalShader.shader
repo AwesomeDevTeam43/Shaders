@@ -2,27 +2,23 @@ Shader "Custom/Stencil/FrankStonePortal"
 {
     Properties
     {
-        [Header(1. Fundo e Centro)]
-        [HDR] _CoreColor    ("Cor do Nucleo", Color) = (0.8, 1.0, 0.8, 1.0)
-        _DarkColor          ("Cor do Vazio (Fundo)", Color) = (0.0, 0.02, 0.01, 1.0)
-        _CoreSize           ("Tamanho do Brilho Central", Range(0.0, 0.5)) = 0.05
+        [Header(1. Colors)]
+        [HDR] _CoreColor        ("Core Color", Color)               = (1.5, 2.0, 1.0, 1.0)
+        [HDR] _MidColor         ("Mid Swirl Color", Color)          = (0.2, 1.5, 0.3, 1.0)
+        [HDR] _DebrisColor      ("Debris Color", Color)             = (0.01, 0.05, 0.01, 1.0)
 
-        [Header(2. Borda Fresnel Rim)]
-        [HDR] _RimColor     ("Cor do Fresnel", Color) = (0.0, 1.0, 0.2, 1.0)
-        _RimPower           ("Potencia do Fresnel", Range(0.1, 10.0)) = 3.0
+        [Header(2. Swirl Effect)]
+        _SwirlSpeed             ("Swirl Rotation Speed", Range(0.0, 10.0)) = 0.5
+        _InwardSpeed            ("Inward Suction Speed", Range(0.0, 10.0)) = 1.0
+        _SwirlTwist             ("Swirl Twist Amount", Range(0.0, 20.0))   = 5.0
+        _SwirlScale             ("Swirl Noise Scale", Range(0.1, 10.0))    = 3.0
 
-        [Header(3. Interior Vortice Espiral)]
-        [HDR] _VortexColor  ("Cor do Vortice", Color) = (0.0, 1.5, 0.2, 1.0)
-        _ArmCount           ("Numero de Bracos", Range(1, 15)) = 4.0
-        _SwirlSpeed         ("Torcao (Twist)", Range(0.0, 30.0)) = 12.0
-        _TimeSpeed          ("Velocidade da Espiral", Range(0.0, 15.0)) = 6.0
-        _EnergySharpness    ("Contraste da Energia", Range(1.0, 20.0)) = 8.0
+        [Header(3. Core)]
+        _CoreSize               ("Core Size", Range(0.0, 1.0))             = 0.3
 
-        [Header(4. Linhas de Vento)]
-        [HDR] _WindColor    ("Cor das Linhas de Vento", Color) = (0.5, 1.0, 0.5, 1.0)
-        _WindSpeed          ("Velocidade de Succao", Range(0.0, 10.0)) = 3.0
-        _WindIntensity      ("Intensidade do Vento", Range(0.0, 2.0)) = 0.8
-        _WindLines          ("Quantidade de Linhas", Range(10, 100)) = 60.0
+        [Header(5. Fresnel)]
+        [HDR] _FresnelColor     ("Fresnel Color", Color)           = (0.0, 1.0, 0.2, 1.0)
+        _FresnelPower           ("Fresnel Power", Range(0.1, 10.0))= 3.0
     }
 
     SubShader
@@ -30,12 +26,12 @@ Shader "Custom/Stencil/FrankStonePortal"
         Tags { "RenderType"="Transparent" "Queue"="Geometry+2" }
         Blend SrcAlpha OneMinusSrcAlpha
         ZWrite Off
-        ZTest Always
+        ZTest LEqual
 
         Stencil
         {
             Ref 1
-            Comp Always // (Muda para Equal quando fores usar a parede falsa!)
+            Comp Always
         }
 
         Pass
@@ -61,24 +57,44 @@ Shader "Custom/Stencil/FrankStonePortal"
             };
 
             float4 _CoreColor;
-            float4 _DarkColor;
-            float _CoreSize;
-
-            float4 _RimColor;
-            float _RimPower;
-
-            float4 _VortexColor;
-            float _ArmCount;
+            float4 _MidColor;
+            float4 _DebrisColor;
             float _SwirlSpeed;
-            float _TimeSpeed;
-            float _EnergySharpness;
+            float _InwardSpeed;
+            float _SwirlTwist;
+            float _SwirlScale;
+            float _CoreSize;
+            float4 _FresnelColor;
+            float _FresnelPower;
 
-            float4 _WindColor;
-            float _WindSpeed;
-            float _WindIntensity;
-            float _WindLines;
+            float hash21(float2 p)
+            {
+                return frac(sin(dot(p, float2(127.1, 311.7))) * 43758.5453123);
+            }
 
-            v2f vert (appdata v)
+            float valueNoise(float2 p)
+            {
+                float2 i = floor(p);
+                float2 f = frac(p);
+                float2 u = f * f * (3.0 - 2.0 * f);
+                float a = hash21(i);
+                float b = hash21(i + float2(1.0, 0.0));
+                float c = hash21(i + float2(0.0, 1.0));
+                float d = hash21(i + float2(1.0, 1.0));
+                return lerp(lerp(a, b, u.x), lerp(c, d, u.x), u.y);
+            }
+
+            float fbm(float2 p)
+            {
+                float v = 0.0;
+                v += 0.5000 * valueNoise(p); p = p * 2.02;
+                v += 0.2500 * valueNoise(p); p = p * 2.03;
+                v += 0.1250 * valueNoise(p); p = p * 2.01;
+                v += 0.0625 * valueNoise(p);
+                return v;
+            }
+
+            v2f vert(appdata v)
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
@@ -88,75 +104,54 @@ Shader "Custom/Stencil/FrankStonePortal"
                 return o;
             }
 
-            fixed4 frag (v2f i) : SV_Target
+            fixed4 frag(v2f i) : SV_Target
             {
-                float2 centered = i.uv - float2(0.5, 0.5);
+                float t = _Time.y;
+                float2 centered = i.uv - 0.5;
                 float radius = length(centered);
                 float angle = atan2(centered.y, centered.x);
 
-                // ==========================================
-                // 1. O VAZIO PROFUNDO
-                // ==========================================
-                float3 col = _DarkColor.rgb;
+                float twistAngle = radius * _SwirlTwist + t * _SwirlSpeed;
+                float s_twist = sin(twistAngle);
+                float c_twist = cos(twistAngle);
+                float2x2 rotTwist = float2x2(c_twist, -s_twist, s_twist, c_twist);
+                
+                float2 swirlUV = mul(rotTwist, centered) * _SwirlScale;
+                swirlUV += float2(t * _InwardSpeed * 0.5, t * _InwardSpeed * 0.7);
+                
+                float swirlNoise = fbm(swirlUV * _SwirlScale);
+                swirlNoise = smoothstep(0.2, 0.8, swirlNoise);
+                
+                float s = sin(t * 0.5), c = cos(t * 0.5);
+                float2x2 rot = float2x2(c, -s, s, c);
+                float2 debrisUV = mul(rot, centered) * 15.0;
+                debrisUV += float2(t * 2.0, t * 1.5);
+                
+                float debrisNoise = valueNoise(debrisUV);
+                debrisNoise *= valueNoise(debrisUV + 5.5); 
+                float debris = smoothstep(0.75, 0.8, debrisNoise);
 
-                // ==========================================
-                // 2. VÓRTICE (Espirais de Energia)
-                // ==========================================
-                float arms = floor(_ArmCount);
-                
-                // O Segredo: A torção matemática
-                float spiralMath = angle * arms + radius * _SwirlSpeed - _Time.y * _TimeSpeed;
-                float spiral = sin(spiralMath) * 0.5 + 0.5;
-                
-                // Eleva a potência para fazer as linhas de energia ficarem afiadas (raios elétricos)
-                float energy = pow(spiral, _EnergySharpness);
-                
-                // Faz a energia desaparecer perto do centro (buraco negro) e nas bordas
-                energy *= smoothstep(0.5, 0.1, radius) * smoothstep(0.0, 0.1, radius);
+                float coreGlow = 1.0 - smoothstep(0.0, _CoreSize, radius);
+                coreGlow = pow(coreGlow, 2.0);
 
-                col = lerp(col, _VortexColor.rgb, energy);
+                float3 col = lerp(_MidColor.rgb * 0.5, _MidColor.rgb, swirlNoise);
+                
+                col += _CoreColor.rgb * coreGlow;
+                
+                col = lerp(col, _DebrisColor.rgb, debris * 0.8);
 
-                // ==========================================
-                // 3. LINHAS DE VENTO (Agora Dobradas!)
-                // ==========================================
-                float lines = floor(_WindLines);
-                
-                // O ERRO ESTAVA AQUI: Agora as linhas sofrem a torção da espiral!
-                float twistedAngle = angle + radius * (_SwirlSpeed * 0.8);
-                float normalizedAngle = frac((twistedAngle + 3.14159) / 6.28318);
-                
-                float slice = floor(normalizedAngle * lines);
-                float streakNoise = frac(sin(slice * 12.9898) * 43758.5);
-                
-                // Multiplicar o raio por 3.0 faz as linhas parecerem traços curtos em vez de riscos infinitos
-                float travel = frac(radius * 3.0 - _Time.y * _WindSpeed);
-                
-                float localAngle = frac(normalizedAngle * lines);
-                float lineThickness = smoothstep(0.1, 0.5, localAngle) * smoothstep(0.9, 0.5, localAngle);
-                
-                float streakMask = smoothstep(0.05, 0.2, radius) * smoothstep(0.5, 0.2, radius);
-                float streak = streakNoise * (1.0 - travel) * lineThickness * streakMask;
-
-                col += _WindColor.rgb * streak * _WindIntensity;
-
-                // ==========================================
-                // 4. BRILHO CENTRAL (O Fim do Túnel)
-                // ==========================================
-                // Usar pow(..., 3.0) corta o "ovo gigante" e deixa só um ponto de luz focado
-                float coreGlow = pow(smoothstep(_CoreSize + 0.1, 0.0, radius), 3.0);
-                col = lerp(col, _CoreColor.rgb, coreGlow);
-
-                // ==========================================
-                // 5. CAMADA FRESNEL (Bordas da Porta)
-                // ==========================================
                 float3 normal = normalize(i.normalWorld);
                 float3 viewDir = normalize(i.viewDirWorld);
-                float rim = 1.0 - saturate(dot(normal, viewDir));
-                float rimIntensity = pow(rim, _RimPower);
+                float NdotV = saturate(dot(normal, viewDir));
+                float fresnel = pow(1.0 - NdotV, _FresnelPower);
+                col += _FresnelColor.rgb * fresnel;
 
-                col += _RimColor.rgb * rimIntensity;
+                float alphaBorder = smoothstep(0.0, 0.02, i.uv.x) * smoothstep(1.0, 0.98, i.uv.x) *
+                                    smoothstep(0.0, 0.02, i.uv.y) * smoothstep(1.0, 0.98, i.uv.y);
+                
+                float alpha = alphaBorder;
 
-                return fixed4(col, 1.0);
+                return fixed4(col, alpha);
             }
             ENDCG
         }
