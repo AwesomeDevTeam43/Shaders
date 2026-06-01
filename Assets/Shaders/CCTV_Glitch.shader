@@ -62,7 +62,6 @@ Shader "Hidden/Custom/CCTV_Glitch"
                 float4 colR = tex2D(_MainTex, uv - float2(_ChromAberration * _GlitchIntensity, 0));
                 float4 colG = tex2D(_MainTex, uv);
                 float4 colB = tex2D(_MainTex, uv + float2(_ChromAberration * _GlitchIntensity, 0));
-
                 float4 col = float4(colR.r, colG.g, colB.b, 1.0);
 
                 float scanLine = random(uv.y * _LinesFrequency * 100 + _Time.y * 2.0);

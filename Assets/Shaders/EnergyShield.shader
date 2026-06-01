@@ -70,13 +70,9 @@ Shader "Custom/EnergyShield"
             {
                 float3 center = (IN[0].worldPos + IN[1].worldPos + IN[2].worldPos) / 3.0;
                 float3 faceNormal = normalize(IN[0].normal + IN[1].normal + IN[2].normal);
-
                 float currentRadius = _ImpactTime * _MaxRadius;
-
                 float dist = length(center - _ImpactPos.xyz);
-
                 float onWave = smoothstep(_RippleWidth, 0.0, abs(dist - currentRadius));
-
                 float active = step(0.001, _ImpactTime);
                 float expand = onWave * 0.04 * (1.0 - _ImpactTime) * active;
 
@@ -84,12 +80,11 @@ Shader "Custom/EnergyShield"
                 i < 3; i++)
                 {
                     float3 newWorldPos = IN[i].worldPos + faceNormal * expand;
-
                     float4 objPos = mul(unity_WorldToObject, float4(newWorldPos, 1.0));
-
                     g2f o;
+
                     o.pos = UnityObjectToClipPos(objPos);
-                    o.worldPos = newWorldPos;
+                    o.worldPos = newWorldPos;sS
                     o.normal = IN[i].normal;
                     o.viewDir = normalize(WorldSpaceViewDir(IN[i].vertex));
                     stream.Append(o);
@@ -103,17 +98,22 @@ Shader "Custom/EnergyShield"
                 float3 V = normalize(i.viewDir);
 
                 float fresnel = pow(1.0 - saturate(dot(N, V)), _FresnelEffect);
+
+
                 float dist = length(i.worldPos - _ImpactPos.xyz);
                 float currentRadius = _ImpactTime * _MaxRadius;
                 float ripple = 1.0 - smoothstep(0.0, _RippleWidth, abs(dist - currentRadius));
+
+
                 float rippleFade = ripple * (1.0 - _ImpactTime) * step(0.001, _ImpactTime);
 
                 fixed4 col;
                 col.rgb = _Color.rgb;
                 col.rgb += fresnel * _Color.rgb;
+
+
                 col.rgb = lerp(col.rgb, _RippleColor.rgb, rippleFade);
                 col.a = _Color.a + fresnel * 0.3 + rippleFade * 0.5;
-
                 return saturate(col);
             }
             ENDCG
